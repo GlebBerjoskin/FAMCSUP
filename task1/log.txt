@@ -1,0 +1,11 @@
+commit 955bf74eee9ee1d703bb2b255ca3bf2deffa0416 (HEAD -> master)
+Author: Gleb Berjoskin <TrulyIrishDancer@yandex.ru>
+Date:   Mon Feb 12 18:58:02 2018 +0300
+
+    add status.txt
+
+commit 8df220ce736eaaba699776ad98c7945e32060928
+Author: Gleb Berjoskin <TrulyIrishDancer@yandex.ru>
+Date:   Mon Feb 12 18:56:04 2018 +0300
+
+    add .gitignore
