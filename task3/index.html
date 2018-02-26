@@ -12,35 +12,18 @@
 
 <body>
 
-<form>
-<header >
-    <table class="textOne">
-        <tr>
-            <td class="L"> </td>
-            <td class="R">YourLight</td>
-            <td class="L"><img src="cam.png"></td>
-            <td class="L"> </td>
-            <td class="L"> </td>
-            <td class="L"> </td>
-            <td class="L"> </td>
-            <td class="L"> </td>
-            <td class="L"> </td>
-            <td class="L"> </td>
-            <td class="L"> </td>
-            <td class="L"> </td>
-            <td class="L"> </td>
-            <td class="L"> </td>
-            <td class="R"><input type="image" src="plus.png" name="submit" /> </td>
-            <td class="R"> <img src="user_blue.png"> </td>
-            <td class="L">Clair Patterson</td>
-            <td class="L"> </td>
-            <td class="L"><input type="image" src="blue_arrow_right.png" name="submit" /></td>
-            <td class="L"> </td>
+<div class="flex-block-for-header">
 
-        </tr>
-    </table>
-</header>
-</form>
+    <div class="flex-container-for-icon-and-name">
+        <div class="text-for-name-in-header"><img src="cam.png"></div>
+        <div class="my-flex-block">YourLight </div>
+        <img src="plus.png">
+        <img src="user_blue.png">
+        <div class="my-flex-block">ClairPatterson</div>
+        <img src="blue_arrow_right.png">
+    </div>
+
+</div>
 
 <form class="filter">
     <p> Фильтровать по:</p>
@@ -53,290 +36,255 @@
     <input type = "text" name="date2" placeholder="01.01.2019"> <br><br>
     #Хэштеги <br>
     <input type="text" name = "hashtags" placeholder="#spring, #joy"> <br><br>
-    <button class="blueButoonOne" type="button">Применить фильтр</button>
+    <button class="blue-button-one" type="button">Применить фильтр</button>
 </form >
 
-<div class="photoPost">
+<br><br>
 
-<div>
-    <table class="text">
-        <tr>
-            <td class="leftcol"> <img src="user_blue.png"> Username Username 01.02.2019 25:78</td>
-                        </tr>
-                    </table>
+<div class="photo-post">
 
-    <img class="image" src="cataren.jpeg">
+    <div class="flex-container-for-posts">
+        <div class="flex-container-for-icon-and-name">
+            <img src="user_blue.png"> Username Username 01.02.2019 25:78
+        </div>
+        <div >
+            <img class="image" src="cataren.jpeg">
+        </div>
+        <div class="flex-container-for-icon-and-name">
+            <p class="photo-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. </p>
+        </div>
 
-
-    <p class="photoText">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-    nisi ut aliquip ex ea commodo consequat. </p>
-
-    <table class="text">
-        <tr>
-            <td class="leftcol"> <p class="hashTag"><em>#hashTag, #hashTag, #hashTag</em></p></td>
-            <td class="rightcol"><input type="image" src="like.png" name="submit" /> </td>
-        </tr>
-    </table>
-
-</div>
-    <br><br>
-
-    <div>
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <img src="user_blue.png"> Username Username 01.02.2019 25:78</td>
-            </tr>
-        </table>
-
-        <img class="image" src="venice.jpg">
-
-
-        <p class="photoText">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. </p>
-
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <p class="hashTag"><em>#hashTag, #hashTag, #hashTag</em></p></td>
-                <td class="rightcol"><input type="image" src="like.png" name="submit" /> </td>
-            </tr>
-        </table>
-
+        <div class="flex-container-for-icon-and-name">
+            <em>#hashTag, #hashTag, #hashTag  </em>
+            <input type="image" src="like.png" name="submit" />
+        </div>
     </div>
 
     <br><br>
 
-    <div>
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <img src="user_blue.png"> Username Username 01.02.2019 25:78</td>
-            </tr>
-        </table>
+    <div class="flex-container-for-posts">
+        <div class="flex-container-for-icon-and-name">
+            <img src="user_blue.png"> Username Username 01.02.2019 25:78
+        </div>
+        <div >
+            <img class="image" src="alps.jpg">
+        </div>
+        <div class="flex-container-for-icon-and-name">
+            <p class="photo-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. </p>
+        </div>
 
-        <img class="image" src="yosemitt.jpg">
-
-
-        <p class="photoText">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. </p>
-
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <p class="hashTag"><em>#hashTag, #hashTag, #hashTag</em></p></td>
-                <td class="rightcol"><input type="image" src="like.png" name="submit" /> </td>
-            </tr>
-        </table>
-
+        <div class="flex-container-for-icon-and-name">
+            <em>#hashTag, #hashTag, #hashTag  </em>
+            <input type="image" src="like.png" name="submit" />
+        </div>
     </div>
 
     <br><br>
 
-    <div>
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <img src="user_blue.png"> Username Username 01.02.2019 25:78</td>
-            </tr>
-        </table>
+    <div class="flex-container-for-posts">
+        <div class="flex-container-for-icon-and-name">
+            <img src="user_blue.png"> Username Username 01.02.2019 25:78
+        </div>
+        <div >
+            <img class="image" src="Italy.jpg">
+        </div>
+        <div class="flex-container-for-icon-and-name">
+            <p class="photo-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. </p>
+        </div>
 
-        <img class="image" src="waterfall.jpg">
+        <div class="flex-container-for-icon-and-name">
+            <em>#hashTag, #hashTag, #hashTag  </em>
+            <input type="image" src="like.png" name="submit" />
+        </div>
+    </div>
 
 
-        <p class="photoText">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. </p>
+    <br><br>
 
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <p class="hashTag"><em>#hashTag, #hashTag, #hashTag</em></p></td>
-                <td class="rightcol"><input type="image" src="like.png" name="submit" /> </td>
-            </tr>
-        </table>
+    <div class="flex-container-for-posts">
+        <div class="flex-container-for-icon-and-name">
+            <img src="user_blue.png"> Username Username 01.02.2019 25:78
+        </div>
+        <div >
+            <img class="image" src="switz.jpg">
+        </div>
+        <div class="flex-container-for-icon-and-name">
+            <p class="photo-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. </p>
+        </div>
 
+        <div class="flex-container-for-icon-and-name">
+            <em>#hashTag, #hashTag, #hashTag  </em>
+            <input type="image" src="like.png" name="submit" />
+        </div>
     </div>
 
     <br><br>
 
-    <div>
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <img src="user_blue.png"> Username Username 01.02.2019 25:78</td>
-            </tr>
-        </table>
+    <div class="flex-container-for-posts">
+        <div class="flex-container-for-icon-and-name">
+            <img src="user_blue.png"> Username Username 01.02.2019 25:78
+        </div>
+        <div >
+            <img class="image" src="venice.jpg">
+        </div>
+        <div class="flex-container-for-icon-and-name">
+            <p class="photo-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. </p>
+        </div>
 
-        <img class="image" src="america.jpg">
-
-
-        <p class="photoText">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. </p>
-
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <p class="hashTag"><em>#hashTag, #hashTag, #hashTag</em></p></td>
-                <td class="rightcol"><input type="image" src="like.png" name="submit" /> </td>
-            </tr>
-        </table>
-
+        <div class="flex-container-for-icon-and-name">
+            <em>#hashTag, #hashTag, #hashTag  </em>
+            <input type="image" src="like.png" name="submit" />
+        </div>
     </div>
 
     <br><br>
 
-    <div>
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <img src="user_blue.png"> Username Username 01.02.2019 25:78</td>
-            </tr>
-        </table>
+    <div class="flex-container-for-posts">
+        <div class="flex-container-for-icon-and-name">
+            <img src="user_blue.png"> Username Username 01.02.2019 25:78
+        </div>
+        <div >
+            <img class="image" src="yosemitt.jpg">
+        </div>
+        <div class="flex-container-for-icon-and-name">
+            <p class="photo-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. </p>
+        </div>
 
-        <img class="image" src="Italy.jpg">
-
-
-        <p class="photoText">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. </p>
-
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <p class="hashTag"><em>#hashTag, #hashTag, #hashTag</em></p></td>
-                <td class="rightcol"><input type="image" src="like.png" name="submit" /> </td>
-            </tr>
-        </table>
-
+        <div class="flex-container-for-icon-and-name">
+            <em>#hashTag, #hashTag, #hashTag  </em>
+            <input type="image" src="like.png" name="submit" />
+        </div>
     </div>
 
     <br><br>
 
-    <div>
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <img src="user_blue.png"> Username Username 01.02.2019 25:78</td>
-            </tr>
-        </table>
+    <div class="flex-container-for-posts">
+        <div class="flex-container-for-icon-and-name">
+            <img src="user_blue.png"> Username Username 01.02.2019 25:78
+        </div>
+        <div >
+            <img class="image" src="carcassonne.jpg">
+        </div>
+        <div class="flex-container-for-icon-and-name">
+            <p class="photo-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. </p>
+        </div>
 
-        <img class="image" src="carcassonne.jpg">
-
-
-        <p class="photoText">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. </p>
-
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <p class="hashTag"><em>#hashTag, #hashTag, #hashTag</em></p></td>
-                <td class="rightcol"><input type="image" src="like.png" name="submit" /> </td>
-            </tr>
-        </table>
-
+        <div class="flex-container-for-icon-and-name">
+            <em>#hashTag, #hashTag, #hashTag  </em>
+            <input type="image" src="like.png" name="submit" />
+        </div>
     </div>
 
     <br><br>
 
-    <div>
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <img src="user_blue.png"> Username Username 01.02.2019 25:78</td>
-            </tr>
-        </table>
+    <div class="flex-container-for-posts">
+        <div class="flex-container-for-icon-and-name">
+            <img src="user_blue.png"> Username Username 01.02.2019 25:78
+        </div>
+        <div >
+            <img class="image" src="canyon.jpg">
+        </div>
+        <div class="flex-container-for-icon-and-name">
+            <p class="photo-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. </p>
+        </div>
 
-        <img class="image" src="canyon.jpg">
-
-
-        <p class="photoText">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. </p>
-
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <p class="hashTag"><em>#hashTag, #hashTag, #hashTag</em></p></td>
-                <td class="rightcol"><input type="image" src="like.png" name="submit" /> </td>
-            </tr>
-        </table>
-
+        <div class="flex-container-for-icon-and-name">
+            <em>#hashTag, #hashTag, #hashTag  </em>
+            <input type="image" src="like.png" name="submit" />
+        </div>
     </div>
 
     <br><br>
 
-    <div>
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <img src="user_blue.png"> Username Username 01.02.2019 25:78</td>
-            </tr>
-        </table>
+    <div class="flex-container-for-posts">
+        <div class="flex-container-for-icon-and-name">
+            <img src="user_blue.png"> Username Username 01.02.2019 25:78
+        </div>
+        <div >
+            <img class="image" src="america.jpg">
+        </div>
+        <div class="flex-container-for-icon-and-name">
+            <p class="photo-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. </p>
+        </div>
 
-        <img class="image" src="alps.jpg">
-
-
-        <p class="photoText">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. </p>
-
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <p class="hashTag"><em>#hashTag, #hashTag, #hashTag</em></p></td>
-                <td class="rightcol"><input type="image" src="like.png" name="submit" /> </td>
-            </tr>
-        </table>
-
+        <div class="flex-container-for-icon-and-name">
+            <em>#hashTag, #hashTag, #hashTag  </em>
+            <input type="image" src="like.png" name="submit" />
+        </div>
     </div>
 
     <br><br>
 
-    <div>
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <img src="user_blue.png"> Username Username 01.02.2019 25:78</td>
-            </tr>
-        </table>
+    <div class="flex-container-for-posts">
+        <div class="flex-container-for-icon-and-name">
+            <img src="user_blue.png"> Username Username 01.02.2019 25:78
+        </div>
+        <div >
+            <img class="image" src="Waterfall.jpg">
+        </div>
+        <div class="flex-container-for-icon-and-name">
+            <p class="photo-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. </p>
+        </div>
 
-        <img class="image" src="switz.jpg">
-
-
-        <p class="photoText">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. </p>
-
-        <table class="text">
-            <tr>
-                <td class="leftcol"> <p class="hashTag"><em>#hashTag, #hashTag, #hashTag</em></p></td>
-                <td class="rightcol"><input type="image" src="like.png" name="submit" /> </td>
-            </tr>
-        </table>
-
+        <div class="flex-container-for-icon-and-name">
+            <em>#hashTag, #hashTag, #hashTag  </em>
+            <input type="image" src="like.png" name="submit" />
+        </div>
     </div>
 
+
     <br><br>
-    <button class="blueButoon" type="button">Загрузить ещё</button>
+    <button class="blue-button-one" type="button">Загрузить ещё</button>
     <br><br>
 
 </div>
-
-    <footer class="footer">
-        <table class="text">
-            <tr>
-                <td class="leftcol">Глеб Берёзкин</td>
-                <td class="rightcol">YourLight</td>
-            </tr>
-            <tr>
-                <td class="leftcol">2 курс 8 группа</td>
-            </tr>
-            <tr>
-                <td class="leftcol">TrulyIrishDancer@yandex.ru</td>
-                <td class="rightcol">Дата последнего изменения: 25.02.2018</td>
-            </tr>
-        </table>
-    </footer>
 
 </body>
+
+<footer class="footer">
+    <div class="text-for-header">
+        <div class="text-for-name-in-header">
+            Глеб Берёзкин
+            YourLight
+        </div>
+        <div class="text-for-name-in-header">
+            2 курс 8 группа
+            TrulyIrishDancer@yandex.ru
+            Дата последнего изменения: 25.02.2018
+        </div>
+
+
+    </div>
+</footer>
 
 </html>
