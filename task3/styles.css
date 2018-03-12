@@ -2,55 +2,40 @@ body {
     margin: 0;
 }
 
-.flex-container-for-header{
+.header{
     display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
+    font-size: 120%;
 }
 
-.flex-container-for-posts{
+.post{
     display: flex;
     flex-direction: column;
     margin-left: 0%;
     max-width: 80%;
 }
 
-.flex-container-for-username{
-    display: flex;
-    justify-content: left;
-}
-
-.flex-container-for-icon-and-name{
+.top{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 110%;
 }
 
-.text-for-name-in-header{
-    font-size: 200%;
-}
-.my-flex-block{
-    flex-grow:12;
-    flex-shrink:3;
-    margin: auto ;
+.bottom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 100%;
 }
 
-.photo-post{
+.feedback{
     width: 60%;
     margin-left: 12% ;
-}
-
-.photo-text{
-    text-align: justify;
-    max-width: 88.5%;
-
-}
-
-.name-of-user{
-    max-width: 100%;
-}
-
-.hash-tag{
-    font-family: "Arial Narrow";
 }
 
 .image{
@@ -62,70 +47,17 @@ body {
     position: page;
     bottom: 0;
     width: 100%;
-    height: 12%;   /* Высота блока footer */
+    height: 18%;   /* Высота блока footer */
     background: lightgrey;
 }
 
-.blue-button{
+.button{
     background: cornflowerblue;
-    margin-left: 38%;
-}
-
-.blue-button-one{
-    background: cornflowerblue;
-    margin-left: 30%;
+    margin-left: 12%;
 }
 
 .filter{
     position: fixed;
-    right: 8%; /* Расстояние от правого края окна браузера */
-    top: 10%; /* Расстояние сверху */
-}
-
-.header{
-    position:fixed;
-    top:0%;
-}
-
-.center-text{
-    text-align: center;
-}
-
-table.text  {
-    width:  90%; /* Ширина таблицы */
-    border-spacing: 0; /* Расстояние между ячейками */
-}
-
-table.text td {
-    width: 50%; /* Ширина ячеек */
-    vertical-align: top; /* Выравнивание по верхнему краю */
-}
-
-td.rightcol { /* Правая ячейка */
-    text-align: left;
-    float: right ;
-}
-
-td.leftcol{
-    text-align: left;
-    vertical-align: top;
-}
-
-table.textOne  {
-    width:  100%; /* Ширина таблицы */
-    border-spacing: 0; /* Расстояние между ячейками */
-}
-
-table.textOne td{
-    width: 5%;
-    vertical-align: center;
-    font-family: Arial, serif;
-}
-
-td.R{
-    text-align: right;
-}
-
-td.L{
-    text-align: left;
+    right: 8%;
+    top: 10%;
 }
