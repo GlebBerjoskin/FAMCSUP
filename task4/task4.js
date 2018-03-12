@@ -357,7 +357,7 @@ var photoPosts = (function() {
 
                 photoLink: 'http://tourout.ru/file/opgq8cnfsulc/600x/i0yfcis2521m.jpg',
 
-                hashTags: ['#Catars', '#Carcassonne'],
+                hashTags: ['#Catars'],
 
                 likes: ['French King'],
 
@@ -400,15 +400,15 @@ var photoPosts = (function() {
             return findPosts;
         }
 
-        filterByDate = function (date, date1, newPosts, top) {
+        filterByDate = function (dateFrom, dateTo, newPosts, top) {
             var findPosts = [];
 
-            if (!date || !date1)
+            if (!dateFrom || !dateTo)
                 return newPosts;
 
             for (var i = 0; i < newPosts.length; i++)
-                if (newPosts[i].createdAt >= date) {
-                    if (newPosts[i].createdAt <= date1 && findPosts.length <= top) {
+                if (newPosts[i].createdAt >= dateFrom) {
+                    if (newPosts[i].createdAt <= dateTo && findPosts.length <= top) {
                         findPosts.push(newPosts[i]);
                     }
                 }
@@ -421,14 +421,20 @@ var photoPosts = (function() {
             if (!hashTag)
                 return newPosts;
 
-            for (var j = 0; j < hashTag.length; j++){
-                if(hashTag[j]) {
-                    for (var i = 0; i < newPosts.length; i++) {
-                        if (newPosts[i].hashTags.indexOf(hashTag[j]) !== -1 && findPosts.length <= top)
-                            findPosts.push(newPosts[i]);
+            for (var j = 0; j < newPosts.length; j++){
+                if(newPosts[j]) {
+                    var keeper = 0;
+                    for (var i = 0; i < hashTag.length; i++) {
+                        if(hashTag[i]){
+                            if (newPosts[j].hashTags.indexOf(hashTag[i]) !== -1 && findPosts.length <= top)
+                                keeper++;
+                        }
+                    }
+                    if(keeper === hashTag.length){
+                        findPosts.push(newPosts[j]);
                     }
                 }
-        }
+            }
             return findPosts;
         }
 
@@ -453,10 +459,10 @@ var photoPosts = (function() {
                 if ("author" in filterConfig)
                     newPosts = filterByAuthor(filterConfig.author, newPosts, top);
 
-                if ("date" in filterConfig)
-                    newPosts = filterByDate(filterConfig.date, filterConfig.date1, newPosts, top);
+                if ("dateFrom" in filterConfig)
+                    newPosts = filterByDate(filterConfig.dateFrom, filterConfig.dateTo, newPosts, top);
 
-                if ("hashTags" in filterConfig)
+                if (filterConfig.hashTags)
                     newPosts = filterByHashTags(filterConfig.hashTags, newPosts, top);
 
                 newPosts = this.sortByDate(newPosts).slice(skip, skip + top);
@@ -520,20 +526,24 @@ var photoPosts = (function() {
                 return false;
 
             if (photoPost.description !== undefined) {
-                if (photoPost.description.length >= 200)
-                    return false;
-                else {
-                    oldPhotoPost.description = photoPost.description;
-                    empty = true;
+                if(photoPost.description !==null){
+                    if (photoPost.description.length >= 200)
+                         return false;
+                    else {
+                        oldPhotoPost.description = photoPost.description;
+                         empty = true;
+                    }
                 }
             }
 
             if (photoPost.photoLink !== undefined) {
-                if (photoPost.photoLink.length === 0)
-                    return false;
-                else {
-                    oldPhotoPost.photoLink = photoPost.photoLink;
-                    empty = true;
+                if(photoPost.photoLink!==null) {
+                    if (photoPost.photoLink.length === 0)
+                        return false;
+                    else {
+                        oldPhotoPost.photoLink = photoPost.photoLink;
+                        empty = true;
+                    }
                 }
             }
 
@@ -559,24 +569,24 @@ var photoPosts = (function() {
         console.log("Initial array: ");
         console.log(Posts.photoPosts);
 
-        console.log("\nSorted by date: ");
+        console.log("\nSorted by dateFrom: ");
         console.log(Posts.sortByDate(Posts.photoPosts));
 
         console.group("\n\n\n getPhotoPosts:");
-        console.log("With default parameters : first 10 posts sorted by date : ")
+        console.log("With default parameters : first 10 posts sorted by dateFrom : ")
         console.log(Posts.getPhotoPosts());
-        console.log("\nSkip = 5, top = 20 :  20 posts after the 5th(14 of them are the result) sorted by date")
+        console.log("\nSkip = 5, top = 20 :  20 posts after the 5th(14 of them are the result) sorted by dateFrom")
         console.log(Posts.getPhotoPosts(5,20));
-        console.log("\nSkip = 5 :  10 posts sorted by date starting from the 6th: ")
+        console.log("\nSkip = 5 :  10 posts sorted by dateFrom starting from the 6th: ")
         console.log(Posts.getPhotoPosts(5));
-        console.log("\nfilterConfig = {author : 'Carcassonne Maid'} : 10 posts by Carcassonne Maid(3 of them are the result) sorted by date: ");
+        console.log("\nfilterConfig = {author : 'Carcassonne Maid'} : 10 posts by Carcassonne Maid(3 of them are the result) sorted by dateFrom: ");
         console.log(Posts.getPhotoPosts(0, 10, {author : 'Carcassonne Maid'} ));
-        console.log("\nfilterConfig = {date1 : '19.02.2018', date : '01.01.2001'} : posts sorted by date published between these dates");
-        console.log(Posts.getPhotoPosts(0, 10,{date : new Date('2001-02-19T00:00:00'), date1 : new Date('2018-02-19T00:00:00')} ));
-        console.log("\nfilterConfig = {hashTag : '#Catars'} : 3 posts sorted by date with this hashTag");
+        console.log("\nfilterConfig = {dateTo : '19.02.2018', dateFrom : '01.01.2001'} : posts sorted by dateFrom published between these dates");
+        console.log(Posts.getPhotoPosts(0, 10,{dateFrom : new Date('2001-02-19T00:00:00'), dateTo : new Date('2018-02-19T00:00:00')} ));
+        console.log("\nfilterConfig = {hashTag : '#Catars'} : 3 posts sorted by dateFrom with this hashTag");
         console.log(Posts.getPhotoPosts(0, 10,{hashTags : ['#Catars']} ));
-        console.log("\nfilterConfig = {author : 'Carcassonne Maid', date:01.01.2001, date1 : '19.05.2018', hashTags :'#Catars'} : 3 posts");
-        console.log(Posts.getPhotoPosts(0, 10,{author : 'Carcassonne Maid', date: new Date('2001-01-01T00:00:00'), date1 : new Date('2018-05-05T00:00:00'), hashTags :['#Catars']} ));
+        console.log("\nfilterConfig = {author : 'Carcassonne Maid', dateFrom:01.01.2001, dateTo : '19.05.2018', hashTags :'#Catars','#Carcassonne'} : 2 posts");
+        console.log(Posts.getPhotoPosts(0, 10,{author : 'Carcassonne Maid', dateFrom: new Date('2001-01-01T00:00:00'), dateTo : new Date('2018-05-05T00:00:00'), hashTags :['#Catars','#Carcassonne']} ));
         console.groupEnd();
 
         console.group("\n\n\ngetPhotoPost:");
