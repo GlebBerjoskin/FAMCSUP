@@ -161,8 +161,13 @@ var photoPosts = (function() {
 
         this.changeCurrentUser = function(userName){
             if(!userName){
-                document.getElementById('userName').innerHTML = "";
+                document.getElementById('userName').innerHTML = "<img src=\"user_blue.png\"> <button class=\"button\" type=\"button\">Войти</button>";
                 document.getElementById('logOut').innerHTML = "";
+                for(var i=0;i<this.photoPosts.length;i++){
+
+                    document.getElementById('feedback').getElementsByClassName('post')[i].innerHTML = depictPhotoPostWW(this.photoPosts[i]);
+
+                }
             }
             else {
                 userName=userName.trim();
@@ -179,8 +184,13 @@ var photoPosts = (function() {
                     }
                 }
                 else{
-                    document.getElementById('userName').innerHTML = "";
+                    document.getElementById('userName').innerHTML = "<img src=\"user_blue.png\"> <button class=\"button\" type=\"button\">Войти</button>";
                     document.getElementById('logOut').innerHTML = "";
+                    for(var i=0;i<this.photoPosts.length;i++){
+
+                            document.getElementById('feedback').getElementsByClassName('post')[i].innerHTML = depictPhotoPostWW(this.photoPosts[i]);
+
+                    }
                 }
             }
         }
@@ -506,6 +516,6 @@ posts.editPhotoPost('6',{
     photoLink: "alps.jpg",
     likes: ['He','She','It', 'they']
 })
-posts.changeCurrentUser("Steve Jobs");
+posts.changeCurrentUser("");
 
 
