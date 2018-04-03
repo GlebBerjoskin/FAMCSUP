@@ -38,7 +38,7 @@ var depictPhotoPost = function(photoPost){
         "</div>\n"
 }
 
-var depictPhotoPostWW = function(photoPost){
+var depictPhotoPostWithoutWrap = function(photoPost){
     let buffer ="";
     if(photoPost.hashTags) {
         for (let i = 0; i < photoPost.hashTags.length; i++) {
@@ -112,7 +112,7 @@ var depictPhotoPostAuthorised = function(photoPost){
         "</div>\n"
 }
 
-var depictPhotoPostAuthorisedWW = function(photoPost){
+var depictPhotoPostAuthorisedWithoutWrap = function(photoPost){
     let buffer ="";
     if(photoPost.hashTags) {
         for (let i = 0; i < photoPost.hashTags.length; i++) {
@@ -165,21 +165,21 @@ var photoPosts = (function() {
                 document.getElementById('logOut').innerHTML = "";
                 for(var i=0;i<this.photoPosts.length;i++){
 
-                    document.getElementById('feedback').getElementsByClassName('post')[i].innerHTML = depictPhotoPostWW(this.photoPosts[i]);
+                    document.getElementById('feedback').getElementsByClassName('post')[i].innerHTML = depictPhotoPostWithoutWrap(this.photoPosts[i]);
 
                 }
             }
             else {
                 userName=userName.trim();
                 if (userName) {
-                    document.getElementById('name').innerHTML = userName;
+                    document.getElementById('userName').innerHTML = userName;
 
                     for(var i=0;i<this.photoPosts.length;i++){
                         if(this.photoPosts[i].author.trim()===userName){
-                            document.getElementById('feedback').getElementsByClassName('post')[i].innerHTML = depictPhotoPostAuthorisedWW(this.photoPosts[i]);
+                            document.getElementById('feedback').getElementsByClassName('post')[i].innerHTML = depictPhotoPostAuthorisedWithoutWrap(this.photoPosts[i]);
                         }
                         else{
-                            document.getElementById('feedback').getElementsByClassName('post')[i].innerHTML = depictPhotoPostWW(this.photoPosts[i]);
+                            document.getElementById('feedback').getElementsByClassName('post')[i].innerHTML = depictPhotoPostWithoutWrap(this.photoPosts[i]);
                         }
                     }
                 }
@@ -188,7 +188,7 @@ var photoPosts = (function() {
                     document.getElementById('logOut').innerHTML = "";
                     for(var i=0;i<this.photoPosts.length;i++){
 
-                            document.getElementById('feedback').getElementsByClassName('post')[i].innerHTML = depictPhotoPostWW(this.photoPosts[i]);
+                            document.getElementById('feedback').getElementsByClassName('post')[i].innerHTML = depictPhotoPostWithoutWrap(this.photoPosts[i]);
 
                     }
                 }
@@ -250,13 +250,13 @@ var photoPosts = (function() {
 
             var newPosts = this.photoPosts;
 
-            if (skip === skip < 0 || skip >= photoPosts.length || skip === undefined)
+            if (skip === skip < 0 || skip >= photoPosts.length || !skip)
                 skip = 0;
 
             else if (skip !== 0) {
                 skip++;
             }
-            if (top === undefined || top <= 0)
+            if (!top || top <= 0)
                 top = 10;
 
             else if (top !== 10) {
@@ -267,10 +267,10 @@ var photoPosts = (function() {
                 if ("author" in filterConfig)
                     newPosts = filterByAuthor(filterConfig.author, newPosts, top);
 
-                if ("dateFrom" in filterConfig)
+                if ("dateFrom" in filterConfig && "dateTo" in filterConfig)
                     newPosts = filterByDate(filterConfig.dateFrom, filterConfig.dateTo, newPosts, top);
 
-                if (filterConfig.hashTags)
+                if (!(!filterConfig.hashTags))
                     newPosts = filterByHashTags(filterConfig.hashTags, newPosts, top);
 
                 newPosts = this.sortByDate(newPosts).slice(skip, skip + top);
@@ -516,6 +516,6 @@ posts.editPhotoPost('6',{
     photoLink: "alps.jpg",
     likes: ['He','She','It', 'they']
 })
-posts.changeCurrentUser("");
+posts.changeCurrentUser("Joe Satriani");
 
 

@@ -586,7 +586,7 @@ var photoPosts = (function() {
         console.log("\nfilterConfig = {hashTag : '#Catars'} : 3 posts sorted by dateFrom with this hashTag");
         console.log(Posts.getPhotoPosts(0, 10,{hashTags : ['#Catars']} ));
         console.log("\nfilterConfig = {author : 'Carcassonne Maid', dateFrom:01.01.2001, dateTo : '19.05.2018', hashTags :'#Catars','#Carcassonne'} : 2 posts");
-        console.log(Posts.getPhotoPosts(0, 10,{author : 'Carcassonne Maid', dateFrom: new Date('2001-01-01T00:00:00'), dateTo : new Date('2018-05-05T00:00:00'), hashTags :['#Catars','#Carcassonne']} ));
+        console.log(Posts.getPhotoPosts(0, 10,{author : 'Carcassonne Maid', dateFrom: new Date('2001-01-01T00:00:00'), dateTo : new Date('2018-05-05T00:00:00')} ));
         console.groupEnd();
 
         console.group("\n\n\ngetPhotoPost:");
