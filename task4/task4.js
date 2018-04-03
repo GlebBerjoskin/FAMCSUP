@@ -442,7 +442,7 @@ var photoPosts = (function() {
 
             var newPosts = this.photoPosts;
 
-            if (skip === skip < 0 || skip >= photoPosts.length || skip === undefined)
+            if (skip === skip < 0 || skip >= photoPosts.length || !skip)
                 skip = 0;
 
             else if (skip !== 0) {
@@ -462,7 +462,7 @@ var photoPosts = (function() {
                 if ("dateFrom" in filterConfig)
                     newPosts = filterByDate(filterConfig.dateFrom, filterConfig.dateTo, newPosts, top);
 
-                if (filterConfig.hashTags)
+                if (!(!filterConfig.hashTags))
                     newPosts = filterByHashTags(filterConfig.hashTags, newPosts, top);
 
                 newPosts = this.sortByDate(newPosts).slice(skip, skip + top);
@@ -501,6 +501,7 @@ var photoPosts = (function() {
                 (typeof(photoPost.photoLink) === "string") &&
                 (photoPost.createdAt instanceof Date)) {
                 if (photoPost.photoLink.length !== 0 && photoPost.description.length <= 200 && photoPost.author !== 0) {
+                    photoPost.hashTags=[];
                     return true;
                 }
             }
@@ -512,6 +513,7 @@ var photoPosts = (function() {
                 return false;
 
             if (this.validatePhotoPost(photoPost) && this.getPhotoPost(photoPost.id) === null) {
+
                 this.photoPosts.push(photoPost);
                 return true;
             }
@@ -587,6 +589,7 @@ var photoPosts = (function() {
         console.log(Posts.getPhotoPosts(0, 10,{hashTags : ['#Catars']} ));
         console.log("\nfilterConfig = {author : 'Carcassonne Maid', dateFrom:01.01.2001, dateTo : '19.05.2018', hashTags :'#Catars','#Carcassonne'} : 2 posts");
         console.log(Posts.getPhotoPosts(0, 10,{author : 'Carcassonne Maid', dateFrom: new Date('2001-01-01T00:00:00'), dateTo : new Date('2018-05-05T00:00:00')} ));
+        console.log(Posts.getPhotoPosts(0, 100,{hashtags:['#hashTag']} ));
         console.groupEnd();
 
         console.group("\n\n\ngetPhotoPost:");
