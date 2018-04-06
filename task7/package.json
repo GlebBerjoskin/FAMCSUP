@@ -1,0 +1,15 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "website for sharing photos",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "htpps://github.com/GlebBerjoskin/FAMCSUP"
+  },
+  "author": "Gleb Berjoskin",
+  "license": "ISC"
+}
