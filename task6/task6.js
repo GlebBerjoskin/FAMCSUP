@@ -13,6 +13,20 @@ function handleBrowseMore() {
 
 }
 
+function filterStringInsert(){
+    return " <p> Фильтровать по:</p>\n" +
+        "                   Имя автора: <br>\n" +
+        "                    <input id=\"nameAuthor\"type=\"text\" placeholder=\"Введите имя автора\"> <br><br>\n" +
+        "                    Дата публикации: <br>\n" +
+        "                       c :<br>\n" +
+        "                     <input type=\"text\" id=\"dateFrom\" placeholder=\"01.01.2001\"><br>\n" +
+        "                        по:<br>\n" +
+        "                       <input type = \"text\" id=\"dateTo\" placeholder=\"01.01.2019\"> <br><br>\n" +
+        "                       #Хэштеги <br>\n" +
+        "                        <input type=\"text\" id = \"hashtags\" placeholder=\"#spring,#joy\"> <br><br>\n" +
+        "                    <button class=\"button\" type=\"button\" id=\"applyFilter\">Применить фильтр</button>";
+}
+
 var depictPhotoPost = function (photoPost) {
     let buffer = "";
     if (photoPost.hashTags) {
@@ -199,7 +213,7 @@ var photoPosts = (function () {
             }
 
             for (var i = 0; i < newPosts.length; i++) {
-                if (newPosts[i].author === author && newPosts[j].depict === '1') {
+                if (newPosts[i].author === author && newPosts[i].depict === '1') {
                     findPosts.push(newPosts[i]);
                 }
             }
@@ -228,7 +242,7 @@ var photoPosts = (function () {
             }
 
             for (var i = 0; i < newPosts.length; i++) {
-                if (newPosts[i].createdAt >= dateFrom && newPosts[j].depict === '1') {
+                if (newPosts[i].createdAt >= dateFrom && newPosts[i].depict === '1') {
                     if (newPosts[i].createdAt <= dateTo) {
                         findPosts.push(newPosts[i]);
                     }
@@ -297,6 +311,11 @@ var photoPosts = (function () {
             else {
                 newPosts = this.sortByDate(this.photoPosts);
             }
+
+            document.getElementById('filter').children[2].value = filterConfig.author;
+            document.getElementById('filter').children[7].value = filterConfig.dateFrom;
+            document.getElementById('filter').children[10].value = filterConfig.dateTo;
+            document.getElementById('filter').children[14].value = filterConfig.hashTags;
 
             var length = 0;
 
@@ -837,8 +856,9 @@ var currentState = JSON.parse(localStorage.getItem("currentState"));
 
 posts.currentUser = currentUser;
 
-if (postsArray.length === 0) {
-    alert("Раскомментируйте большой участок кода, в котором в Local storage помещаются посты и авторы");
+if (!postsArray) {
+    alert("Раскомментируйте большой участок кода, в котором в Localstorage помещаются посты и авторы. Перезагрузите страницу и после этого закомментируйте этот участок кода обратно." +
+        "Пароли для пользователей, а также их логины можно узнать в этом участке кода");
 }
 
 for (var i = 0; i < postsArray.length; i++) {
@@ -867,18 +887,25 @@ function handleLoggingOut() {
     catch (err) {
     }
 
+    console.log();
+
     posts.currentUser = "";
     currentUser = "";
     localStorage.setItem("user", JSON.stringify(""));
     document.getElementById('browse-button').innerHTML = "<button class=\"button\" type=\"button\" id=\"browse\">Загрузить ещё</button>";
+    document.getElementById('filter').innerHTML = filterStringInsert();
+    var applyFilterPage = document.getElementById('applyFilter');
+    applyFilterPage.addEventListener('click', handleFilterApply);
     posts.getPhotoPosts(10, filterConfig);
     posts.changeCurrentUser(posts.currentUser);
 
     var logInPage = document.getElementById('loggingIn');
     logInPage.addEventListener('click', handleLoggingIn);
-
+try {
     var browseMorePage = document.getElementById('browse');
     browseMorePage.addEventListener('click', handleBrowseMore);
+}
+catch(err){}
 
     try {
         var applyFilterPage = document.getElementById('applyFilter');
@@ -886,20 +913,6 @@ function handleLoggingOut() {
     }
 
     catch (err) {
-        document.getElementById('filter').innerHTML = " <p> Фильтровать по:</p>\n" +
-            "                   Имя автора: <br>\n" +
-            "                    <input id=\"nameAuthor\"type=\"text\" placeholder=\"Введите имя автора\"> <br><br>\n" +
-            "                    Дата публикации: <br>\n" +
-            "                       c :<br>\n" +
-            "                     <input type=\"text\" id=\"dateFrom\" placeholder=\"01.01.2001\"><br>\n" +
-            "                        по:<br>\n" +
-            "                       <input type = \"text\" id=\"dateTo\" placeholder=\"01.01.2019\"> <br><br>\n" +
-            "                       #Хэштеги <br>\n" +
-            "                        <input type=\"text\" id = \"hashtags\" placeholder=\"#spring, #joy\"> <br><br>\n" +
-            "                    <button class=\"button\" type=\"button\" id=\"applyFilter\">Применить фильтр</button>";
-
-        var applyFilterPage = document.getElementById('applyFilter');
-        applyFilterPage.addEventListener('click', handleFilterApply);
     }
 }
 
@@ -928,7 +941,7 @@ function handleAddingNewPost() {
 
     localStorage.setItem("photoPosts", JSON.stringify(posts.photoPosts));
 
-    document.getElementById('name').innerHTML = userName;
+    document.getElementById('name').innerHTML = posts.currentUser;
 
     document.getElementById('logOut').innerHTML = "<input type=\'image\' src=\"blue_arrow_right.png\" id='logging-out'>";
     document.getElementById('logging-out').addEventListener('click', handleLoggingOut);
@@ -936,21 +949,16 @@ function handleAddingNewPost() {
     document.getElementById('browse-button').innerHTML = "<button class=\"button\" type=\"button\" id=\"browse\">Загрузить ещё</button>";
     document.getElementById('browse').addEventListener('click', handleBrowseMore);
 
-    document.getElementById('filter').innerHTML = " <p> Фильтровать по:</p>\n" +
-        "                   Имя автора: <br>\n" +
-        "                    <input id=\"nameAuthor\"type=\"text\" placeholder=\"Введите имя автора\"> <br><br>\n" +
-        "                    Дата публикации: <br>\n" +
-        "                       c :<br>\n" +
-        "                     <input type=\"text\" id=\"dateFrom\" placeholder=\"01.01.2001\"><br>\n" +
-        "                        по:<br>\n" +
-        "                       <input type = \"text\" id=\"dateTo\" placeholder=\"01.01.2019\"> <br><br>\n" +
-        "                       #Хэштеги <br>\n" +
-        "                        <input type=\"text\" id = \"hashtags\" placeholder=\"#spring, #joy\"> <br><br>\n" +
-        "                    <button class=\"button\" type=\"button\" id=\"applyFilter\">Применить фильтр</button>";
-    document.getElementById('applyFilter').addEventListener('click', handleFilterApply);
+    document.getElementById('filter').innerHTML = filterStringInsert();
 
     document.getElementById('editingCreating').innerHTML = "";
     document.getElementById('buttonWrap').innerHTML = "";
+
+    try {
+        document.querySelector('.feedback').addEventListener('click', handleDeletingEditingPost);
+    }
+    catch (err) {
+    }
 
     posts.getPhotoPosts(10, filterConfig);
 }
@@ -1001,27 +1009,7 @@ function handleLoginPasswordInput() {
 
                 localStorage.setItem("user", JSON.stringify(loginName));
 
-                document.getElementById('filter').innerHTML = " <p> Фильтровать по:</p>\n" +
-                    "    \n" +
-                    "    Имя автора: <br>\n" +
-                    "    \n" +
-                    "    <input id=\"nameAuthor\"type=\"text\" placeholder=\"Введите имя автора\"> <br><br>\n" +
-                    "    \n" +
-                    "    Дата публикации: <br>\n" +
-                    "    \n" +
-                    "    c :<br>\n" +
-                    "    \n" +
-                    "    <input type=\"text\" id=\"dateFrom\" placeholder=\"01.01.2001\"><br>\n" +
-                    "    \n" +
-                    "    по:<br>\n" +
-                    "    \n" +
-                    "    <input type = \"text\" id=\"dateTo\" placeholder=\"01.01.2019\"> <br><br>\n" +
-                    "    \n" +
-                    "    #Хэштеги <br>\n" +
-                    "    \n" +
-                    "    <input type=\"text\" id = \"hashtags\" placeholder=\"#spring, #joy\"> <br><br>\n" +
-                    "    \n" +
-                    "    <button class=\"button\" type=\"button\" id=\"applyFilter\">Применить фильтр</button>";
+                document.getElementById('filter').innerHTML = filterStringInsert();
 
                 document.getElementById('head').innerHTML = "<div class=\"header\"> <img src=\"cam.png\">YourLight</div>\n" +
                     "\n" +
@@ -1044,7 +1032,18 @@ function handleLoginPasswordInput() {
                 var applyFilterBrowsedPage = document.getElementById('applyFilter');
                 applyFilterBrowsedPage.addEventListener('click', handleFilterApply);
 
-                document.getElementById('addingPost').addEventListener('click', handleAddingPost);
+                var addingPostPage = document.getElementById('addingPost');
+                addingPostPage.addEventListener('click', handleAddingPost);
+
+                var logOutPage = document.getElementById('logging-out');
+                logOutPage.addEventListener('click', handleLoggingOut);
+
+                try {
+                    var deleteEditPostPage = document.querySelector('.feedback');
+                    deleteEditPostPage.addEventListener('click', handleDeletingEditingPost);
+                }
+                catch (err) {
+                }
             }
         }
     }
@@ -1054,10 +1053,6 @@ function handleLoginPasswordInput() {
     }
 
 }
-
-applyFilter.addEventListener('click', handleFilterApply);
-
-browseMore.addEventListener('click', handleBrowseMore);
 
 function handleEditingPostApply() {
     var nameOfPicture = document.getElementById('choosing').value;
@@ -1069,15 +1064,15 @@ function handleEditingPostApply() {
     var tags = document.getElementById('tagOfPost').value;
 
     var idOfPostToEdit = document.getElementById('editingCreating').children[0].children[0].id;
-
+console.log(idOfPostToEdit);
     if (text.length > 200 || text.length === 0) {
         alert('Слишком короткое или слишком длинное описание!');
         return 0;
     }
 
-    posts.photoPosts[idOfPostToEdit].photoLink=nameOfPicture;
-    posts.photoPosts[idOfPostToEdit].hashTags=tags.split(",");
-    posts.photoPosts[idOfPostToEdit].description=text;
+    posts.getPhotoPost(idOfPostToEdit.toString()).photoLink=nameOfPicture;
+    posts.getPhotoPost(idOfPostToEdit.toString()).hashTags=tags.split(",");
+    posts.getPhotoPost(idOfPostToEdit.toString()).description=text;
 
     localStorage.setItem("photoPosts", JSON.stringify(posts.photoPosts));
 
@@ -1089,18 +1084,14 @@ function handleEditingPostApply() {
     document.getElementById('browse-button').innerHTML = "<button class=\"button\" type=\"button\" id=\"browse\">Загрузить ещё</button>";
     document.getElementById('browse').addEventListener('click', handleBrowseMore);
 
-    document.getElementById('filter').innerHTML = " <p> Фильтровать по:</p>\n" +
-        "                   Имя автора: <br>\n" +
-        "                    <input id=\"nameAuthor\"type=\"text\" placeholder=\"Введите имя автора\"> <br><br>\n" +
-        "                    Дата публикации: <br>\n" +
-        "                       c :<br>\n" +
-        "                     <input type=\"text\" id=\"dateFrom\" placeholder=\"01.01.2001\"><br>\n" +
-        "                        по:<br>\n" +
-        "                       <input type = \"text\" id=\"dateTo\" placeholder=\"01.01.2019\"> <br><br>\n" +
-        "                       #Хэштеги <br>\n" +
-        "                        <input type=\"text\" id = \"hashtags\" placeholder=\"#spring, #joy\"> <br><br>\n" +
-        "                    <button class=\"button\" type=\"button\" id=\"applyFilter\">Применить фильтр</button>";
+    document.getElementById('filter').innerHTML = filterStringInsert();
     document.getElementById('applyFilter').addEventListener('click', handleFilterApply);
+
+    try {
+        document.querySelector('.feedback').addEventListener('click', handleDeletingEditingPost);
+    }
+    catch (err) {
+    }
 
     document.getElementById('editingCreating').innerHTML = "";
     document.getElementById('buttonWrap').innerHTML = "";
@@ -1156,13 +1147,19 @@ function handleDeletingEditingPost(event) {
 }
 
 if (currentUser === "") {
+    applyFilter.addEventListener('click', handleFilterApply);
+    browseMore.addEventListener('click', handleBrowseMore);
+
     posts.changeCurrentUser(posts.currentUser);
     posts.getPhotoPosts(10, filterConfig);
+
     var logIn = document.getElementById('loggingIn');
     logIn.addEventListener('click', handleLoggingIn);
 }
 
 if (currentUser !== "") {
+    applyFilter.addEventListener('click', handleFilterApply);
+    browseMore.addEventListener('click', handleBrowseMore);
 
     posts.changeCurrentUser(posts.currentUser);
     posts.getPhotoPosts(10, filterConfig);
@@ -1174,8 +1171,8 @@ if (currentUser !== "") {
     logOut.addEventListener('click', handleLoggingOut);
 
     try {
-        var deletePost = document.querySelector('.feedback');
-        deletePost.addEventListener('click', handleDeletingEditingPost);
+        var deleteEditPost = document.querySelector('.feedback');
+        deleteEditPost.addEventListener('click', handleDeletingEditingPost);
     }
     catch (err) {
     }
