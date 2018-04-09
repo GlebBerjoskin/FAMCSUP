@@ -406,31 +406,39 @@ var photoPosts = (function() {
             if (!dateFrom || !dateTo)
                 return newPosts;
 
-            for (var i = 0; i < newPosts.length; i++)
+            for (var i = 0; i < newPosts.length; i++) {
                 if (newPosts[i].createdAt >= dateFrom) {
                     if (newPosts[i].createdAt <= dateTo && findPosts.length <= top) {
                         findPosts.push(newPosts[i]);
                     }
                 }
+            }
             return findPosts;
         }
 
         filterByHashTags = function (hashTag, newPosts, top) {
             var findPosts = [];
 
-            if (!hashTag)
+            if (!hashTag || hashTag.length === 0) {
                 return newPosts;
+            }
 
-            for (var j = 0; j < newPosts.length; j++){
-                if(newPosts[j]) {
+            for (var j = 0; j < newPosts.length; j++) {
+                if (newPosts[j]) {
                     var keeper = 0;
+
+                    if (hashTag.length === 1) {
+                        if (hashTag[0] === '') {
+                            findPosts.push(newPosts[j]);
+                        }
+                    }
                     for (var i = 0; i < hashTag.length; i++) {
-                        if(hashTag[i]){
-                            if (newPosts[j].hashTags.indexOf(hashTag[i]) !== -1 && findPosts.length <= top)
+                        if (hashTag[i]) {
+                            if (newPosts[j].hashTags.indexOf(hashTag[i]) !== -1)
                                 keeper++;
                         }
                     }
-                    if(keeper === hashTag.length){
+                    if (keeper === hashTag.length) {
                         findPosts.push(newPosts[j]);
                     }
                 }
@@ -439,10 +447,7 @@ var photoPosts = (function() {
         }
 
         this.getPhotoPosts = function (skip, top, filterConfig) {
-
-            var newPosts = this.photoPosts;
-
-            if (skip === skip < 0 || skip >= photoPosts.length || !skip)
+            if (skip < 0 || skip >= this.photoPosts.length || !skip)
                 skip = 0;
 
             else if (skip !== 0) {
@@ -455,6 +460,8 @@ var photoPosts = (function() {
                 top++;
             }
 
+            var newPosts = this.photoPosts.slice(0,(skip-1));
+
             if (filterConfig) {
                 if ("author" in filterConfig)
                     newPosts = filterByAuthor(filterConfig.author, newPosts, top);
@@ -462,7 +469,7 @@ var photoPosts = (function() {
                 if ("dateFrom" in filterConfig)
                     newPosts = filterByDate(filterConfig.dateFrom, filterConfig.dateTo, newPosts, top);
 
-                if (!(!filterConfig.hashTags))
+                if (filterConfig.hashTags)
                     newPosts = filterByHashTags(filterConfig.hashTags, newPosts, top);
 
                 newPosts = this.sortByDate(newPosts).slice(skip, skip + top);
@@ -577,7 +584,7 @@ var photoPosts = (function() {
         console.group("\n\n\n getPhotoPosts:");
         console.log("With default parameters : first 10 posts sorted by dateFrom : ")
         console.log(Posts.getPhotoPosts());
-        console.log("\nSkip = 5, top = 20 :  20 posts after the 5th(14 of them are the result) sorted by dateFrom")
+        console.log("\nSkip = 5, top = 20 :  20 posts after the 5th sorted by dateFrom")
         console.log(Posts.getPhotoPosts(5,20));
         console.log("\nSkip = 5 :  10 posts sorted by dateFrom starting from the 6th: ")
         console.log(Posts.getPhotoPosts(5));
@@ -587,9 +594,9 @@ var photoPosts = (function() {
         console.log(Posts.getPhotoPosts(0, 10,{dateFrom : new Date('2001-02-19T00:00:00'), dateTo : new Date('2018-02-19T00:00:00')} ));
         console.log("\nfilterConfig = {hashTag : '#Catars'} : 3 posts sorted by dateFrom with this hashTag");
         console.log(Posts.getPhotoPosts(0, 10,{hashTags : ['#Catars']} ));
-        console.log("\nfilterConfig = {author : 'Carcassonne Maid', dateFrom:01.01.2001, dateTo : '19.05.2018', hashTags :'#Catars','#Carcassonne'} : 2 posts");
+        console.log("\nfilterConfig = {author : 'Carcassonne Maid', dateFrom:01.01.2001, dateTo : '19.05.2018', hashTags :'#Catars','#Carcassonne'} : 3 posts");
         console.log(Posts.getPhotoPosts(0, 10,{author : 'Carcassonne Maid', dateFrom: new Date('2001-01-01T00:00:00'), dateTo : new Date('2018-05-05T00:00:00')} ));
-        console.log(Posts.getPhotoPosts(0, 100,{hashtags:['#hashTag']} ));
+        console.log(Posts.getPhotoPosts(0, 100,{hashTags:['#hashTag']}));
         console.groupEnd();
 
         console.group("\n\n\ngetPhotoPost:");

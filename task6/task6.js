@@ -212,8 +212,9 @@ var photoPosts = (function () {
                 return newPosts;
             }
 
+            console.log(author.toLowerCase());
             for (var i = 0; i < newPosts.length; i++) {
-                if (newPosts[i].author === author && newPosts[i].depict === '1') {
+                if (newPosts[i].author.toLowerCase() === author.toLowerCase() && newPosts[i].depict === '1') {
                     findPosts.push(newPosts[i]);
                 }
             }
@@ -886,8 +887,6 @@ function handleLoggingOut() {
     }
     catch (err) {
     }
-
-    console.log();
 
     posts.currentUser = "";
     currentUser = "";

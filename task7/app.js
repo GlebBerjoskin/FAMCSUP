@@ -7,7 +7,7 @@ http.createServer(function (request, response) {
   const url = request.url;
   fs.readFile('./' + url, function(err, data) {
     if (err) {
-      fs.readFile('./public/error404.html', function (err2, data2) {
+      fs.readFile('./public/index.html', function (err2, data2) {
         if(err2){
           response.writeHead(404, "Not Found");
           response.end();

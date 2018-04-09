@@ -250,7 +250,7 @@ var photoPosts = (function() {
 
             var newPosts = this.photoPosts;
 
-            if (skip === skip < 0 || skip >= photoPosts.length || !skip)
+            if (skip < 0 || skip >= photoPosts.length || !skip)
                 skip = 0;
 
             else if (skip !== 0) {
@@ -270,7 +270,7 @@ var photoPosts = (function() {
                 if ("dateFrom" in filterConfig && "dateTo" in filterConfig)
                     newPosts = filterByDate(filterConfig.dateFrom, filterConfig.dateTo, newPosts, top);
 
-                if (!(!filterConfig.hashTags))
+                if (filterConfig.hashTags)
                     newPosts = filterByHashTags(filterConfig.hashTags, newPosts, top);
 
                 newPosts = this.sortByDate(newPosts).slice(skip, skip + top);
@@ -365,7 +365,7 @@ var photoPosts = (function() {
                 }
             }
             console.log(document.getElementById('feedback').getElementsByClassName('post'));
-            document.getElementById('feedback').getElementsByClassName('post')[id-1].innerHTML = depictPhotoPostWW(oldPhotoPost);
+            document.getElementById('feedback').getElementsByClassName('post')[id-1].innerHTML = depictPhotoPostWithoutWrap(oldPhotoPost);
 
             return empty;
         }
