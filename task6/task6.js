@@ -15,15 +15,15 @@ function handleBrowseMore() {
 
 function filterStringInsert(){
     return " <p> Фильтровать по:</p>\n" +
-        "                   Имя автора: <br>\n" +
-        "                    <input id=\"nameAuthor\"type=\"text\" placeholder=\"Введите имя автора\"> <br><br>\n" +
-        "                    Дата публикации: <br>\n" +
-        "                       c :<br>\n" +
-        "                     <input type=\"text\" id=\"dateFrom\" placeholder=\"01.01.2001\"><br>\n" +
-        "                        по:<br>\n" +
-        "                       <input type = \"text\" id=\"dateTo\" placeholder=\"01.01.2019\"> <br><br>\n" +
-        "                       #Хэштеги <br>\n" +
-        "                        <input type=\"text\" id = \"hashtags\" placeholder=\"#spring,#joy\"> <br><br>\n" +
+        "                   <p>Имя автора: </p>\n" +
+        "                    <p><input id=\"nameAuthor\"type=\"text\" placeholder=\"Введите имя автора\"> </p>\n" +
+        "                    <p>Дата публикации: </p>\n" +
+        "                       <p>c :</p>\n" +
+        "                     <p><input type=\"text\" id=\"dateFrom\" placeholder=\"01.01.2001\"></p>\n" +
+        "                        <p>по:</p>\n" +
+        "                       <p><input type = \"text\" id=\"dateTo\" placeholder=\"01.01.2019\"> </p>\n" +
+        "                       <p>#Хэштеги </p>\n" +
+        "                       <p> <input type=\"text\" id = \"hashtags\" placeholder=\"#spring,#joy\"> </p>\n" +
         "                    <button class=\"button\" type=\"button\" id=\"applyFilter\">Применить фильтр</button>";
 }
 
@@ -59,8 +59,7 @@ var depictPhotoPost = function (photoPost) {
         "<div><input type=\"image\" src=\"like.png\" name=\"submit\" /></div>\n" +
         "                        </div>  \n" +
         "                    </div>\n" +
-        "<br><br>" +
-        "</div>\n"
+        "</div>\n";
 }
 
 var depictPhotoPostWithoutWrap = function (photoPost) {
@@ -93,8 +92,7 @@ var depictPhotoPostWithoutWrap = function (photoPost) {
         "                        <div class=\"bottom\">\n" + "<div>" + likes + "</div>\n" +
         "<div><input type=\"image\" src=\"like.png\" name=\"submit\" /></div>\n" +
         "                        </div>  \n" +
-        "                    </div>\n" +
-        "<br><br>"
+        "                    </div>\n";
 }
 
 var depictPhotoPostAuthorised = function (photoPost) {
@@ -133,8 +131,7 @@ var depictPhotoPostAuthorised = function (photoPost) {
         likes + "<input type=\"image\" src=\"like.png\" name=\"submit\" />\n" +
         "                        </div>  \n" +
         "                    </div>\n" +
-        "<br><br>" +
-        "</div>\n"
+        "</div>\n";
 }
 
 var depictPhotoPostAuthorisedWithoutWrap = function (photoPost) {
@@ -173,8 +170,7 @@ var depictPhotoPostAuthorisedWithoutWrap = function (photoPost) {
         "                        <div class=\"bottom\">\n" +
         likes + "<input type=\"image\" src=\"like.png\" name=\"submit\" />\n" +
         "                        </div>  \n" +
-        "                    </div>\n" +
-        "<br><br>"
+        "                    </div>\n";
 }
 
 
@@ -907,8 +903,8 @@ try {
 catch(err){}
 
     try {
-        var applyFilterPage = document.getElementById('applyFilter');
-        applyFilterPage.addEventListener('click', handleFilterApply);
+        var applyFilterPageOne = document.getElementById('applyFilter');
+        applyFilterPageOne.addEventListener('click', handleFilterApply);
     }
 
     catch (err) {
@@ -968,11 +964,11 @@ function handleAddingPost() {
     document.getElementById('filter').innerHTML = "";
 
     document.getElementById('editingCreating').innerHTML = "<p>Ссылка на фото:"+
-        "</p><input type=\" file \" id=\"choosing\" accept=\".png,.jpg,.jpeg\"/><br><br>\n" +
+        "</p><p><input type=\" file \" id=\"choosing\" accept=\".png,.jpg,.jpeg\"/></p>\n" +
         "<p>Текст поста:</p>"+
-        "<textarea rows=\"4\" cols=\"100\" id=\"textOfPost\" ></textarea><br><br>\n" +
+        "<p><textarea rows=\"4\" cols=\"100\" id=\"textOfPost\" ></textarea></p>\n" +
         "<p></p>Хэштеги:</p>"+
-        "<input type=\"text\" id=\"tagOfPost\" />\n<br><br></div>\n";
+        "<p><input type=\"text\" id=\"tagOfPost\" />\n</p></div>\n";
     document.getElementById('buttonWrap').innerHTML = "<button class=\"button\" id=\"inputNewPost\">Загрузить пост</button>";
 
     document.getElementById('inputNewPost').addEventListener('click', handleAddingNewPost);
@@ -983,8 +979,8 @@ function handleLoggingIn() {
     document.getElementById('filter').innerHTML = "";
     document.getElementById('browse-button').innerHTML = "";
     stringInner = "<div class=\"logging-in\" id=\"logging-fields\">\n" +
-        "    Введите  логин<br><input type = \"text\" id=\"loginName\"> <br><br>\n" +
-        "    Введите пароль<br><input type=\"password\" id = \"password\"> <br><br>\n" +
+        "    <p>Введите  логин</p><p><input type = \"text\" id=\"loginName\">\n" +
+        "    <p>Введите пароль</p>><input type=\"password\" id = \"password\"> <p></p>\n" +
         "    <button class=\"button-logging\" id=\"inputRegistration\">Войти</button>\n" +
         "    </div>";
     document.getElementById('feedback').innerHTML = stringInner;
@@ -1133,11 +1129,11 @@ function handleDeletingEditingPost(event) {
         //console.log(document.getElementById('represent'));
 
         document.getElementById('editingCreating').innerHTML = "<div class=\"post\"> \n <img src=\"" + valueOfPicture + "\" class=\"photo-editing\" id=\"" + idOfEditedPost+
-            "\"><br><br> \n" +
-            "<input type=\" file \" id=\"choosing\" accept=\".png,.jpg,.jpeg\" value=\"" + valueOfPicture + "\"/><br><br>\n" +
-            "<textarea rows=\"4\" cols=\"100\" id=\"textOfPost\" >" + valueOfText +
-            "</textarea><br><br>\n" +
-            "<input type=\"text\" id=\"tagOfPost\" value=\"" + valueOfTags + "\" />\n<br><br></div>\n";
+            "\"><p></p> \n" +
+            "<p><input type=\" file \" id=\"choosing\" accept=\".png,.jpg,.jpeg\" value=\"" + valueOfPicture + "\"/></p>\n" +
+            "<p><textarea rows=\"4\" cols=\"100\" id=\"textOfPost\" >" + valueOfText +
+            "</textarea></p>\n" +
+            "<input type=\"text\" id=\"tagOfPost\" value=\"" + valueOfTags + "\" />\n</div>\n";
         document.getElementById('buttonWrap').innerHTML = "<button class=\"button\" id=\"inputNewPost\">Загрузить пост</button>";
 
         document.getElementById('inputNewPost').addEventListener('click', handleEditingPostApply);
