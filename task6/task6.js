@@ -16,14 +16,14 @@ function handleBrowseMore() {
 function filterStringInsert(){
     return " <p> Фильтровать по:</p>\n" +
         "                   <p>Имя автора: </p>\n" +
-        "                    <p><input id=\"nameAuthor\"type=\"text\" placeholder=\"Введите имя автора\"> </p>\n" +
+        "                    <input id=\"nameAuthor\"type=\"text\" placeholder=\"Введите имя автора\">\n" +
         "                    <p>Дата публикации: </p>\n" +
         "                       <p>c :</p>\n" +
-        "                     <p><input type=\"text\" id=\"dateFrom\" placeholder=\"01.01.2001\"></p>\n" +
+        "                     <input type=\"text\" id=\"dateFrom\" placeholder=\"01.01.2001\">\n" +
         "                        <p>по:</p>\n" +
-        "                       <p><input type = \"text\" id=\"dateTo\" placeholder=\"01.01.2019\"> </p>\n" +
+        "                       <input type = \"text\" id=\"dateTo\" placeholder=\"01.01.2019\">\n" +
         "                       <p>#Хэштеги </p>\n" +
-        "                       <p> <input type=\"text\" id = \"hashtags\" placeholder=\"#spring,#joy\"> </p>\n" +
+        "                       <input type=\"text\" id = \"hashtags\" placeholder=\"#spring,#joy\">\n" +
         "                    <button class=\"button\" type=\"button\" id=\"applyFilter\">Применить фильтр</button>";
 }
 
@@ -310,9 +310,9 @@ var photoPosts = (function () {
             }
 
             document.getElementById('filter').children[2].value = filterConfig.author;
-            document.getElementById('filter').children[7].value = filterConfig.dateFrom;
-            document.getElementById('filter').children[10].value = filterConfig.dateTo;
-            document.getElementById('filter').children[14].value = filterConfig.hashTags;
+            document.getElementById('filter').children[5].value = filterConfig.dateFrom;
+            document.getElementById('filter').children[7].value = filterConfig.dateTo;
+            document.getElementById('filter').children[9].value = filterConfig.hashTags;
 
             var length = 0;
 
@@ -980,7 +980,7 @@ function handleLoggingIn() {
     document.getElementById('browse-button').innerHTML = "";
     stringInner = "<div class=\"logging-in\" id=\"logging-fields\">\n" +
         "    <p>Введите  логин</p><p><input type = \"text\" id=\"loginName\">\n" +
-        "    <p>Введите пароль</p>><input type=\"password\" id = \"password\"> <p></p>\n" +
+        "    <p>Введите пароль</p><input type=\"password\" id = \"password\"> <p></p>\n" +
         "    <button class=\"button-logging\" id=\"inputRegistration\">Войти</button>\n" +
         "    </div>";
     document.getElementById('feedback').innerHTML = stringInner;

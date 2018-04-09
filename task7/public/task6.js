@@ -526,7 +526,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-02-03T12:00:00'),
     author: "Mark Twain",
     hashTags:['#hashtag'],
-    photoLink: "alps.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It']
 },
 {depict:'1',
@@ -537,7 +537,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-02-02T12:00:00'),
     author: "Rudolf Shenker",
     hashTags:['#rock', '#roll','#kottak'],
-    photoLink: "Italy.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: []
 },
     {depict:'1',
@@ -548,7 +548,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-02-01T12:00:00'),
     author: "Steve Jobs",
     hashTags:['#city', '#lights'],
-    photoLink: "venice.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
 },
     {depict:'1',
@@ -559,7 +559,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-19T12:00:00'),
     author: "Michael Flatley",
     hashTags:['#charming', '#France','#Languedok'],
-    photoLink: "carcassonne.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It','they','somebody']
 },
     {depict:'1',
@@ -570,7 +570,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-18T12:00:00'),
     author: "Ronnie James Dio",
     hashTags:['#fortress', '#restricted'],
-    photoLink: "cataren.jpeg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He']
 },
     {depict:'1',
@@ -581,7 +581,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-17T12:00:00'),
     author: "Joe Cocker",
     hashTags:['#nature'],
-    photoLink: "canyon.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She']
 },
     {depict:'1',
@@ -592,7 +592,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-16T12:00:00'),
     author: "Ingwie Malmsten",
     hashTags:['#switzerland', '#Alps'],
-    photoLink: "switz.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It', 'they']
 },
     {depict:'1',
@@ -603,7 +603,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-15T12:00:00'),
     author: "Steve Jobs",
     hashTags:['#failed_dream', '#old_town','#silent_mood'],
-    photoLink: "america.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It', 'they']
 },
     {depict:'1',
@@ -614,7 +614,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-14T12:00:00'),
     author: "Ronnie James Dio",
     hashTags:['#beauty'],
-    photoLink: "Waterfall.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It']
 },
     {depict:'1',
@@ -625,7 +625,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-13T12:00:00'),
     author: "Klaus Meine",
     hashTags:['#Yosemit'],
-    photoLink: "yosemitt.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It', 'they']
 },
     {depict:'1',
@@ -636,7 +636,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-12T12:00:00'),
         author: "Mark Twain",
         hashTags:['#Titanic'],
-        photoLink: "tit.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -647,7 +647,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-11T12:00:00'),
         author: "Joe Cocker",
         hashTags:['#Bulsara', '#Mercury'],
-        photoLink: "bulsara.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -658,7 +658,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-10T12:00:00'),
         author: "Oldschool Skater",
         hashTags:['#vert', '#skate_or_die'],
-        photoLink: "skate.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -669,7 +669,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-09T12:00:00'),
         author: "Jack Unknown",
         hashTags:['#film'],
-        photoLink: "future.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -680,7 +680,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-08T12:00:00'),
         author: "Les Paul",
         hashTags:['#my_guitar', '#lespaul','#gibson'],
-        photoLink: "lespaul.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -691,7 +691,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-07T12:00:00'),
         author: "Do Longboard!",
         hashTags:['#slides', '#are','#guides','#skate_or_die'],
-        photoLink: "slide.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -702,7 +702,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-06T12:00:00'),
         author: "Swedish King",
         hashTags:['#my_ship'],
-        photoLink: "vasa.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -713,7 +713,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-05T12:00:00'),
         author: "Rich Man",
         hashTags:['#yacht', '#mine'],
-        photoLink: "yacht.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -724,7 +724,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-04T12:00:00'),
         author: "Wolfgang Mozart",
         hashTags:['#nature', '#beauty'],
-        photoLink: "zalz.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -735,7 +735,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-03T12:00:00'),
         author: "African Hunter",
         hashTags:['#stone'],
-        photoLink: "zimb.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -746,7 +746,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-01T12:00:00'),
         author: "Oldschool Skater",
         hashTags:['#skate_or_die'],
-        photoLink: "skaters.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
 ];
