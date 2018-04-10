@@ -508,7 +508,9 @@ var photoPosts = (function() {
                 (typeof(photoPost.photoLink) === "string") &&
                 (photoPost.createdAt instanceof Date)) {
                 if (photoPost.photoLink.length !== 0 && photoPost.description.length <= 200 && photoPost.author !== 0) {
-                    photoPost.hashTags=[];
+                    if(!photoPost.hashTags){
+                        photoPost.hashTags=[];
+                    }
                     return true;
                 }
             }
