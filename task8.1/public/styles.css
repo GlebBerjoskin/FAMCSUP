@@ -1,0 +1,120 @@
+body {
+    margin: 0;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 120%;
+}
+
+.post{
+    display: flex;
+    flex-direction: column;
+    margin-left: 0%;
+    max-width: 80%;
+}
+
+.photo-editing{
+    display: flex;
+    flex-direction: column;
+    margin-left: 0%;
+    max-width:100%;
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 110%;
+}
+
+.bottom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 100%;
+}
+
+.feedback{
+    width: 60%;
+    margin-left: 12% ;
+}
+
+.editing-creating{
+     width:60%;
+     margin-left:25%;
+ }
+
+.represent{
+    width:60%;
+    margin-left:20%;
+}
+
+.wrap{
+    max-width: 125%;
+}
+
+.background{
+    background: white;
+    width:1%;
+    height: 50%;
+    margin-bottom: 60.5%;
+}
+
+.image{
+    float: bottom;
+    max-width: 100%;
+}
+
+.mistake{
+    background: darksalmon;
+    width:70%;
+}
+
+.deleting-button{}
+
+.editing-button{}
+
+.footer{
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+    background: cornflowerblue;
+}
+
+.button{
+    background: cornflowerblue;
+    margin-left:40%;
+}
+
+.button-browser{
+    background: cornflowerblue;
+    margin-left:40%;
+}
+
+.button-logging{
+    background: cornflowerblue;
+    margin-left:13%;
+}
+
+.logging-in{
+margin-left:48%;
+}
+
+.place-eater{
+    width: 100%;
+    height: 10%;
+    background: white;
+}
+
+.filter{
+    position: fixed;
+    right: 8%;
+    top: 10%;
+}

@@ -1,5 +1,5 @@
-var photoPosts = (function() {
-    return function() {
+var photoPosts = (function () {
+    return function () {
 
         this.photoPosts = [
 
@@ -394,8 +394,9 @@ var photoPosts = (function() {
                 return newPosts;
 
             for (var i = 0; i < newPosts.length; i++)
-                if (newPosts[i].author === author && findPosts.length <= top)
+                if (newPosts[i].author === author) {
                     findPosts.push(newPosts[i]);
+                }
 
             return findPosts;
         }
@@ -408,7 +409,7 @@ var photoPosts = (function() {
 
             for (var i = 0; i < newPosts.length; i++) {
                 if (newPosts[i].createdAt >= dateFrom) {
-                    if (newPosts[i].createdAt <= dateTo && findPosts.length <= top) {
+                    if (newPosts[i].createdAt <= dateTo) {
                         findPosts.push(newPosts[i]);
                     }
                 }
@@ -417,33 +418,11 @@ var photoPosts = (function() {
         }
 
         filterByHashTags = function (hashTag, newPosts, top) {
-            var findPosts = [];
-
-            if (!hashTag || hashTag.length === 0) {
-                return newPosts;
-            }
-
-            for (var j = 0; j < newPosts.length; j++) {
-                if (newPosts[j]) {
-                    var keeper = 0;
-
-                    if (hashTag.length === 1) {
-                        if (hashTag[0] === '') {
-                            findPosts.push(newPosts[j]);
-                        }
-                    }
-                    for (var i = 0; i < hashTag.length; i++) {
-                        if (hashTag[i]) {
-                            if (newPosts[j].hashTags.indexOf(hashTag[i]) !== -1)
-                                keeper++;
-                        }
-                    }
-                    if (keeper === hashTag.length) {
-                        findPosts.push(newPosts[j]);
-                    }
-                }
-            }
-            return findPosts;
+            return newPosts.filter(function (post) {
+                return hashTag.every(function (hashTagIndex) {
+                    return post.hashTags.includes(hashTagIndex);
+                });
+            });
         }
 
         this.getPhotoPosts = function (skip, top, filterConfig) {
@@ -460,7 +439,7 @@ var photoPosts = (function() {
                 top++;
             }
 
-            var newPosts = this.photoPosts.slice(0,(skip-1));
+            var newPosts = this.photoPosts;
 
             if (filterConfig) {
                 if ("author" in filterConfig)
@@ -485,12 +464,12 @@ var photoPosts = (function() {
             return a.createdAt - b.createdAt
         }
 
-        this.sortByDate = function(array) {
+        this.sortByDate = function (array) {
             var findPosts = array.slice();
             return findPosts.sort(sortF);
         }
 
-        this.getPhotoPost = function(id) {
+        this.getPhotoPost = function (id) {
             if (!id)
                 return null;
 
@@ -501,15 +480,15 @@ var photoPosts = (function() {
             return null;
         }
 
-        this.validatePhotoPost = function(photoPost) {
+        this.validatePhotoPost = function (photoPost) {
             if ((typeof(photoPost.id) === "string") &&
                 (typeof(photoPost.description) === "string") &&
                 (typeof(photoPost.author) === "string") &&
                 (typeof(photoPost.photoLink) === "string") &&
                 (photoPost.createdAt instanceof Date)) {
                 if (photoPost.photoLink.length !== 0 && photoPost.description.length <= 200 && photoPost.author !== 0) {
-                    if(!photoPost.hashTags){
-                        photoPost.hashTags=[];
+                    if (!photoPost.hashTags) {
+                        photoPost.hashTags = [];
                     }
                     return true;
                 }
@@ -517,7 +496,7 @@ var photoPosts = (function() {
             return false;
         }
 
-        this.addPhotoPost = function(photoPost) {
+        this.addPhotoPost = function (photoPost) {
             if (!photoPost)
                 return false;
 
@@ -530,25 +509,25 @@ var photoPosts = (function() {
             return false;
         }
 
-        this.editPhotoPost = function(id, photoPost) {
+        this.editPhotoPost = function (id, photoPost) {
             var oldPhotoPost = this.getPhotoPost(id);
             var empty = false;
-            if (!oldPhotoPost || !photoPost|| !id)
+            if (!oldPhotoPost || !photoPost || !id)
                 return false;
 
             if (photoPost.description !== undefined) {
-                if(photoPost.description !==null){
+                if (photoPost.description !== null) {
                     if (photoPost.description.length >= 200)
-                         return false;
+                        return false;
                     else {
                         oldPhotoPost.description = photoPost.description;
-                         empty = true;
+                        empty = true;
                     }
                 }
             }
 
             if (photoPost.photoLink !== undefined) {
-                if(photoPost.photoLink!==null) {
+                if (photoPost.photoLink !== null) {
                     if (photoPost.photoLink.length === 0)
                         return false;
                     else {
@@ -561,7 +540,7 @@ var photoPosts = (function() {
             return empty;
         }
 
-        this.removePhotoPost = function(id) {
+        this.removePhotoPost = function (id) {
             if (!id)
                 return false;
             for (var i = 0; i < this.photoPosts.length; i++)
@@ -575,93 +554,101 @@ var photoPosts = (function() {
 
 })();
 
-        var Posts = new photoPosts();
+var Posts = new photoPosts();
 
-        console.log("Initial array: ");
-        console.log(Posts.photoPosts);
+console.log("Initial array: ");
+console.log(Posts.photoPosts);
 
-        console.log("\nSorted by dateFrom: ");
-        console.log(Posts.sortByDate(Posts.photoPosts));
+console.log("\nSorted by dateFrom: ");
+console.log(Posts.sortByDate(Posts.photoPosts));
 
-        console.group("\n\n\n getPhotoPosts:");
-        console.log("With default parameters : first 10 posts sorted by dateFrom : ")
-        console.log(Posts.getPhotoPosts());
-        console.log("\nSkip = 5, top = 20 :  20 posts after the 5th sorted by dateFrom")
-        console.log(Posts.getPhotoPosts(5,20));
-        console.log("\nSkip = 5 :  10 posts sorted by dateFrom starting from the 6th: ")
-        console.log(Posts.getPhotoPosts(5));
-        console.log("\nfilterConfig = {author : 'Carcassonne Maid'} : 10 posts by Carcassonne Maid(3 of them are the result) sorted by dateFrom: ");
-        console.log(Posts.getPhotoPosts(0, 10, {author : 'Carcassonne Maid'} ));
-        console.log("\nfilterConfig = {dateTo : '19.02.2018', dateFrom : '01.01.2001'} : posts sorted by dateFrom published between these dates");
-        console.log(Posts.getPhotoPosts(0, 10,{dateFrom : new Date('2001-02-19T00:00:00'), dateTo : new Date('2018-02-19T00:00:00')} ));
-        console.log("\nfilterConfig = {hashTag : '#Catars'} : 3 posts sorted by dateFrom with this hashTag");
-        console.log(Posts.getPhotoPosts(0, 10,{hashTags : ['#Catars']} ));
-        console.log("\nfilterConfig = {author : 'Carcassonne Maid', dateFrom:01.01.2001, dateTo : '19.05.2018', hashTags :'#Catars','#Carcassonne'} : 3 posts");
-        console.log(Posts.getPhotoPosts(0, 10,{author : 'Carcassonne Maid', dateFrom: new Date('2001-01-01T00:00:00'), dateTo : new Date('2018-05-05T00:00:00')} ));
-        console.log(Posts.getPhotoPosts(0, 100,{hashTags:['#hashTag']}));
-        console.groupEnd();
+console.group("\n\n\n getPhotoPosts:");
+console.log("With default parameters : first 10 posts sorted by dateFrom : ")
+console.log(Posts.getPhotoPosts());
+console.log("\nSkip = 5, top = 20 :  20 posts after the 5th sorted by dateFrom")
+console.log(Posts.getPhotoPosts(5, 20));
+console.log("\nSkip = 5 :  10 posts sorted by dateFrom starting from the 6th: ")
+console.log(Posts.getPhotoPosts(5));
+console.log("\nfilterConfig = {author : 'Carcassonne Maid'} : 10 posts by Carcassonne Maid(3 of them are the result) sorted by dateFrom: ");
+console.log(Posts.getPhotoPosts(0, 10, {author: 'Carcassonne Maid'}));
+console.log("\nfilterConfig = {dateTo : '19.02.2018', dateFrom : '01.01.2001'} : posts sorted by dateFrom published between these dates");
+console.log(Posts.getPhotoPosts(0, 10, {
+    dateFrom: new Date('2001-02-19T00:00:00'),
+    dateTo: new Date('2018-02-19T00:00:00')
+}));
+console.log("\nfilterConfig = {hashTag : '#Catars'} : 3 posts sorted by dateFrom with this hashTag");
+console.log(Posts.getPhotoPosts(0, 10, {hashTags: ['#Catars']}));
+console.log("\nfilterConfig = {author : 'Carcassonne Maid', dateFrom:01.01.2001, dateTo : '19.05.2018', hashTags :'#Catars','#Carcassonne'} : 3 posts");
+console.log(Posts.getPhotoPosts(0, 10, {
+    author: 'Carcassonne Maid',
+    dateFrom: new Date('2001-01-01T00:00:00'),
+    dateTo: new Date('2018-05-05T00:00:00')
+}));
+console.groupEnd();
 
-        console.group("\n\n\ngetPhotoPost:");
-        console.log('photoPost with id 5 : ');
-        console.log(Posts.getPhotoPost('5'));
-        console.log('\nphotoPost with id 25(no posts) : ');
-        console.log(Posts.getPhotoPost('25'));
-        console.groupEnd();
+console.group("\n\n\ngetPhotoPost:");
+console.log('photoPost with id 5 : ');
+console.log(Posts.getPhotoPost('5'));
+console.log('\nphotoPost with id 25(no posts) : ');
+console.log(Posts.getPhotoPost('25'));
+console.groupEnd();
 
-        console.group("\n\nMethod validatePhotoPost");
-        console.log('True : ');
-        console.log(Posts.validatePhotoPost(Posts.getPhotoPost('11')));
-        console.log('False because of long description : ');
-        console.log(Posts.validatePhotoPost(Posts.tooMuchWords));
-        console.log('False because of empty arguments : ');
-        console.log(Posts.validatePhotoPost(Posts.invalidArgs));
-        console.log('False for the lack of arguments : ');
-        console.log(Posts.validatePhotoPost({
-            id: '25',
-            description: 'Lorem ipsum',
-            createdAt: new Date('2018-02-03T12:00:00'),
-        }));
-        console.groupEnd();
+console.group("\n\nMethod validatePhotoPost");
+console.log('True : ');
+console.log(Posts.validatePhotoPost(Posts.getPhotoPost('11')));
+console.log('False because of long description : ');
+console.log(Posts.validatePhotoPost(Posts.tooMuchWords));
+console.log('False because of empty arguments : ');
+console.log(Posts.validatePhotoPost(Posts.invalidArgs));
+console.log('False for the lack of arguments : ');
+console.log(Posts.validatePhotoPost({
+    id: '25',
+    description: 'Lorem ipsum',
+    createdAt: new Date('2018-02-03T12:00:00'),
+}));
+console.groupEnd();
 
 
-        console.group("\n\n\n addPhotoPost");
-        console.log('Post with id = 21 is added : ');
-        console.log(Posts.addPhotoPost({
-            id: '21',
-            description: 'Lorem ipsum',
-            createdAt: new Date('2018-02-03T12:00:00'),
-            author: 'Mark Twain',
-            photoLink: 'https://farm6.staticflickr.com/5143/5577219477_608307068c_o.jpg'
-        }));
-        console.log('\n\nReturn false because of existing post with the same ID : ');
-        console.log(Posts.addPhotoPost(Posts.getPhotoPost('5')));
-        console.log('Return false for the lack of arguments : ');
-        console.log(Posts.addPhotoPost({id: '25', description: 'lorem ipsum'}));
-        console.groupEnd();
+console.group("\n\n\n addPhotoPost");
+console.log('Post with id = 21 is added : ');
+console.log(Posts.addPhotoPost({
+    id: '21',
+    description: 'Lorem ipsum',
+    createdAt: new Date('2018-02-03T12:00:00'),
+    author: 'Mark Twain',
+    photoLink: 'https://farm6.staticflickr.com/5143/5577219477_608307068c_o.jpg'
+}));
+console.log('\n\nReturn false because of existing post with the same ID : ');
+console.log(Posts.addPhotoPost(Posts.getPhotoPost('5')));
+console.log('Return false for the lack of arguments : ');
+console.log(Posts.addPhotoPost({id: '25', description: 'lorem ipsum'}));
+console.groupEnd();
 
-        console.group("\n\n\n editPhotoPost");
-        console.log('Post with id=5 is edited : ');
-        console.log(Posts.editPhotoPost('5', {description : 'First iPhone ever'}));
-        console.log("\nPhotoPost with id \'5\' after editing : ");
-        console.log(Posts.photoPosts[4]);
-        console.log('\nReturn false because such id doesn\'t exist: ');
-        console.log(Posts.editPhotoPost('200', {description : 'I was in Mexico last night...'}));
-        console.log('\nReturn false because you can\'t change id : ');
-        console.log(Posts.editPhotoPost('5', {id : '1'}));
-        console.log('\nReturn false because of too long description) : ');
-        console.log(Posts.editPhotoPost('26', {description : '0000000000000000000000000000000000000000000000000' +
-            '000000000000000000000000000000000000000000000000000000000000000' +
-            '0000000000000000000000000000000000000000000000000000' +
-            '0000000000000000000000000000000000000000000000000000'}));
-        console.groupEnd();
+console.group("\n\n\n editPhotoPost");
+console.log('Post with id=5 is edited : ');
+console.log(Posts.editPhotoPost('5', {description: 'First iPhone ever'}));
+console.log("\nPhotoPost with id \'5\' after editing : ");
+console.log(Posts.photoPosts[4]);
+console.log('\nReturn false because such id doesn\'t exist: ');
+console.log(Posts.editPhotoPost('200', {description: 'I was in Mexico last night...'}));
+console.log('\nReturn false because you can\'t change id : ');
+console.log(Posts.editPhotoPost('5', {id: '1'}));
+console.log('\nReturn false because of too long description) : ');
+console.log(Posts.editPhotoPost('26', {
+    description: '0000000000000000000000000000000000000000000000000' +
+    '000000000000000000000000000000000000000000000000000000000000000' +
+    '0000000000000000000000000000000000000000000000000000' +
+    '0000000000000000000000000000000000000000000000000000'
+}));
+console.groupEnd();
 
-        console.group("\n\nremovePhotoPost");
-        console.log('Delete photoPost with id=1 : ');
-        console.log(Posts.removePhotoPost('1'));
-        console.log("\nArray after deleting photoPost : ");
-        console.log(Posts.photoPosts);
-        console.log('\nReturn false because id=100 doesn\'t exist : ');
-        console.log(Posts.removePhotoPost('100'));
-        console.groupEnd();
+console.group("\n\nremovePhotoPost");
+console.log('Delete photoPost with id=1 : ');
+console.log(Posts.removePhotoPost('1'));
+console.log("\nArray after deleting photoPost : ");
+console.log(Posts.photoPosts);
+console.log('\nReturn false because id=100 doesn\'t exist : ');
+console.log(Posts.removePhotoPost('100'));
+console.groupEnd();
 
 

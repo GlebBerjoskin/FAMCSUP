@@ -15,15 +15,15 @@ function handleBrowseMore() {
 
 function filterStringInsert(){
     return " <p> Фильтровать по:</p>\n" +
-        "                   <p>Имя автора: </p>\n" +
-        "                    <input id=\"nameAuthor\"type=\"text\" placeholder=\"Введите имя автора\">\n" +
-        "                    <p>Дата публикации: </p>\n" +
-        "                       <p>c :</p>\n" +
-        "                     <input type=\"text\" id=\"dateFrom\" placeholder=\"01.01.2001\">\n" +
-        "                        <p>по:</p>\n" +
-        "                       <input type = \"text\" id=\"dateTo\" placeholder=\"01.01.2019\">\n" +
-        "                       <p>#Хэштеги </p>\n" +
-        "                       <input type=\"text\" id = \"hashtags\" placeholder=\"#spring,#joy\">\n" +
+        "                   Имя автора: <br>\n" +
+        "                    <input id=\"nameAuthor\"type=\"text\" placeholder=\"Введите имя автора\"> <br><br>\n" +
+        "                    Дата публикации: <br>\n" +
+        "                       c :<br>\n" +
+        "                     <input type=\"text\" id=\"dateFrom\" placeholder=\"01.01.2001\"><br>\n" +
+        "                        по:<br>\n" +
+        "                       <input type = \"text\" id=\"dateTo\" placeholder=\"01.01.2019\"> <br><br>\n" +
+        "                       #Хэштеги <br>\n" +
+        "                        <input type=\"text\" id = \"hashtags\" placeholder=\"#spring,#joy\"> <br><br>\n" +
         "                    <button class=\"button\" type=\"button\" id=\"applyFilter\">Применить фильтр</button>";
 }
 
@@ -45,21 +45,22 @@ var depictPhotoPost = function (photoPost) {
     return "<div class=\"post\">\n" +
         "                    <div class=\"header\">\n" +
         "                        <div class=\"top\">\n" +
-        "                           <img src=\"user_blue.png\">" + photoPost.author +
+        "                           <img src=\"images/user_blue.png\">" + photoPost.author +
         "                        </div>\n" +
         "                        <div class=\"top\">" + (photoPost.createdAt) + "</div>\n" +
         "                    </div>\n" +
-        "                    <img class=\"image\" src=" + photoPost.photoLink + " id=\"" + photoPost.id + "\">\n" +
+        "                    <img class=\"image\" src=images/" + photoPost.photoLink + " id=\"" + photoPost.id + "\">\n" +
         "                    <p>" + photoPost.description + "</p>\n" +
         "                    <div class=\"header\">\n" +
         "                        <div class=\"bottom\">\n" +
         "                               <em>" + buffer + "</em>\n" +
         "                        </div>\n" +
         "                        <div class=\"bottom\">\n" + "<div>" + likes + "</div>\n" +
-        "<div><input type=\"image\" src=\"like.png\" name=\"submit\" /></div>\n" +
+        "<div><input type=\"image\" src=\"images/like.png\" name=\"submit\" /></div>\n" +
         "                        </div>  \n" +
         "                    </div>\n" +
-        "</div>\n";
+        "<br><br>" +
+        "</div>\n"
 }
 
 var depictPhotoPostWithoutWrap = function (photoPost) {
@@ -79,20 +80,21 @@ var depictPhotoPostWithoutWrap = function (photoPost) {
     }
     return "                    <div class=\"header\">\n" +
         "                        <div class=\"top\">\n" +
-        "                           <img src=\"user_blue.png\">" + photoPost.author +
+        "                           <img src=\"images/user_blue.png\">" + photoPost.author +
         "                        </div>\n" +
         "                        <div class=\"top\">" + (photoPost.createdAt) + "</div>\n" +
         "                    </div>\n" +
-        "                    <img class=\"image\" src=" + photoPost.photoLink + " id=\"" + photoPost.id + "\">\n" +
+        "                    <img class=\"image\" src=images/" + photoPost.photoLink + " id=\"" + photoPost.id + "\">\n" +
         "                    <p>" + photoPost.description + "</p>\n" +
         "                    <div class=\"header\">\n" +
         "                        <div class=\"bottom\">\n" +
         "                               <em>" + buffer + "</em>\n" +
         "                        </div>\n" +
         "                        <div class=\"bottom\">\n" + "<div>" + likes + "</div>\n" +
-        "<div><input type=\"image\" src=\"like.png\" name=\"submit\" /></div>\n" +
+        "<div><input type=\"image\" src=\"images/like.png\" name=\"submit\" /></div>\n" +
         "                        </div>  \n" +
-        "                    </div>\n";
+        "                    </div>\n" +
+        "<br><br>"
 }
 
 var depictPhotoPostAuthorised = function (photoPost) {
@@ -112,26 +114,27 @@ var depictPhotoPostAuthorised = function (photoPost) {
     return "<div class=\"post\">\n" +
         "                    <div class=\"header\">\n" +
         "                        <div class=\"top\">\n" +
-        "                           <img src=\"user_blue.png\">" + photoPost.author +
+        "                           <img src=\"images/user_blue.png\">" + photoPost.author +
         "                        </div>\n" +
         "                        <div class=\"top\">" + (photoPost.createdAt) + "</div>\n" +
         "                    </div>\n" +
-        "                    <img class=\"image\" src=" + photoPost.photoLink + " id=\"" + photoPost.id + "\">\n" +
+        "                    <img class=\"image\" src=images/" + photoPost.photoLink + " id=\"" + photoPost.id + "\">\n" +
         "                    <p>" + photoPost.description + "</p>\n" +
         "                    <div class=\"header\">\n" +
         "                        <div class=\"bottom\">\n" +
         "                               <em>" + buffer + "</em>\n" +
         "                        </div>\n" +
         "                        <div class=\"bottom\">\n" +
-        "                               <input type=\"image\" src=\"pencil32.png\" name=\"submitPost\" class=\"editing-button\"/>\n" + "</div>\n" +
+        "                               <input type=\"image\" src=\"images/pencil32.png\" name=\"submitPost\" class=\"editing-button\"/>\n" + "</div>\n" +
         "                       <div class=\"bottom\">\n" +
-        "                               <input type=\"image\" src=\"bin.png\" id=\"deleteIt\" class=\"deleting-button\"/>\n" +
+        "                               <input type=\"image\" src=\"images/bin.png\" id=\"deleteIt\" class=\"deleting-button\"/>\n" +
         "                        </div>\n" +
         "                        <div class=\"bottom\">\n" +
-        likes + "<input type=\"image\" src=\"like.png\" name=\"submit\" />\n" +
+        likes + "<input type=\"image\" src=\"images/like.png\" name=\"submit\" />\n" +
         "                        </div>  \n" +
         "                    </div>\n" +
-        "</div>\n";
+        "<br><br>" +
+        "</div>\n"
 }
 
 var depictPhotoPostAuthorisedWithoutWrap = function (photoPost) {
@@ -150,7 +153,7 @@ var depictPhotoPostAuthorisedWithoutWrap = function (photoPost) {
     }
     return "                    <div class=\"header\">\n" +
         "                        <div class=\"top\">\n" +
-        "                           <img src=\"user_blue.png\">" + photoPost.author +
+        "                           <img src=\"images/user_blue.png\">" + photoPost.author +
         "                        </div>\n" +
         "                        <div class=\"top\">" + (photoPost.createdAt) + "</div>\n" +
         "                    </div>\n" +
@@ -162,15 +165,16 @@ var depictPhotoPostAuthorisedWithoutWrap = function (photoPost) {
         "                               <em>" + buffer + "</em>\n" +
         "                        </div>\n" +
         "                        <div class=\"bottom\">\n" +
-        "                               <input type=\"image\" src=\"pencil32.png\" name=\"submitPost\" class=\"editing-button\"/>" +
+        "                               <input type=\"image\" src=\"images/pencil32.png\" name=\"submitPost\" class=\"editing-button\"/>" +
         "                        </div>\n" +
         "                        <div class=\"bottom\">\n" +
-        "                               <input type=\"image\" src=\"bin.png\" id=\"deleteIt\" class=\"deleting-button\"/>\n" +
+        "                               <input type=\"image\" src=\"images/bin.png\" id=\"deleteIt\" class=\"deleting-button\"/>\n" +
         "                        </div>\n" +
         "                        <div class=\"bottom\">\n" +
-        likes + "<input type=\"image\" src=\"like.png\" name=\"submit\" />\n" +
+        likes + "<input type=\"image\" src=\"images/like.png\" name=\"submit\" />\n" +
         "                        </div>  \n" +
-        "                    </div>\n";
+        "                    </div>\n" +
+        "<br><br>"
 }
 
 
@@ -183,19 +187,19 @@ var photoPosts = (function () {
 
         this.changeCurrentUser = function (userName) {
             if (!userName) {
-                document.getElementById('userName').innerHTML = "<img src=\"user_blue.png\"> <button class=\"button\" type=\"button\" id=\"loggingIn\">Войти</button>";
+                document.getElementById('userName').innerHTML = "<img src=\"images/user_blue.png\"> <button class=\"button\" type=\"button\" id=\"loggingIn\">Войти</button>";
                 document.getElementById('logOut').innerHTML = "";
             }
             else {
                 userName = userName.trim();
                 if (userName) {
 
-                    document.getElementById('userName').innerHTML = "<img src=\"user_blue.png\"><div id=\"name\"></div><div id=\"plusContainer\"><input type=\"image\" src=\"plus.png\" id=\"addingPost\"></div>";
+                    document.getElementById('userName').innerHTML = "<img src=\"images/user_blue.png\"><div id=\"name\"></div><div id=\"plusContainer\"><input type=\"image\" src=\"images/plus.png\" id=\"addingPost\"></div>";
                     document.getElementById('name').innerHTML = userName;
-                    document.getElementById('logOut').innerHTML = "<input type=\'image\' src=\"blue_arrow_right.png\" id='logging-out'>";
+                    document.getElementById('logOut').innerHTML = "<input type=\'image\' src=\"images/blue_arrow_right.png\" id='logging-out'>";
                 }
                 else {
-                    document.getElementById('userName').innerHTML = "<img src=\"user_blue.png\"> <button class=\"button\" type=\"button\" id=\"loggingIn\">Войти</button>";
+                    document.getElementById('userName').innerHTML = "<img src=\"images/user_blue.png\"> <button class=\"button\" type=\"button\" id=\"loggingIn\">Войти</button>";
                     document.getElementById('logOut').innerHTML = "";
                 }
             }
@@ -208,9 +212,8 @@ var photoPosts = (function () {
                 return newPosts;
             }
 
-            console.log(author.toLowerCase());
             for (var i = 0; i < newPosts.length; i++) {
-                if (newPosts[i].author.toLowerCase() === author.toLowerCase() && newPosts[i].depict === '1') {
+                if (newPosts[i].author === author && newPosts[i].depict === '1') {
                     findPosts.push(newPosts[i]);
                 }
             }
@@ -310,9 +313,9 @@ var photoPosts = (function () {
             }
 
             document.getElementById('filter').children[2].value = filterConfig.author;
-            document.getElementById('filter').children[5].value = filterConfig.dateFrom;
-            document.getElementById('filter').children[7].value = filterConfig.dateTo;
-            document.getElementById('filter').children[9].value = filterConfig.hashTags;
+            document.getElementById('filter').children[7].value = filterConfig.dateFrom;
+            document.getElementById('filter').children[10].value = filterConfig.dateTo;
+            document.getElementById('filter').children[14].value = filterConfig.hashTags;
 
             var length = 0;
 
@@ -342,7 +345,7 @@ var photoPosts = (function () {
             }
 
             if (newPosts.length === 0) {
-                document.getElementById('feedback').innerHTML = "<img src=\"err.png\" class=\'post\'>";
+                document.getElementById('feedback').innerHTML = "<img src=\"images/err.png\" class=\'post\'>";
                 return 0;
             }
 
@@ -523,7 +526,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-02-03T12:00:00'),
     author: "Mark Twain",
     hashTags:['#hashtag'],
-    photoLink: "alps.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It']
 },
 {depict:'1',
@@ -534,7 +537,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-02-02T12:00:00'),
     author: "Rudolf Shenker",
     hashTags:['#rock', '#roll','#kottak'],
-    photoLink: "Italy.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: []
 },
     {depict:'1',
@@ -545,7 +548,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-02-01T12:00:00'),
     author: "Steve Jobs",
     hashTags:['#city', '#lights'],
-    photoLink: "venice.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
 },
     {depict:'1',
@@ -556,7 +559,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-19T12:00:00'),
     author: "Michael Flatley",
     hashTags:['#charming', '#France','#Languedok'],
-    photoLink: "carcassonne.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It','they','somebody']
 },
     {depict:'1',
@@ -567,7 +570,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-18T12:00:00'),
     author: "Ronnie James Dio",
     hashTags:['#fortress', '#restricted'],
-    photoLink: "cataren.jpeg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He']
 },
     {depict:'1',
@@ -578,7 +581,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-17T12:00:00'),
     author: "Joe Cocker",
     hashTags:['#nature'],
-    photoLink: "canyon.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She']
 },
     {depict:'1',
@@ -589,7 +592,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-16T12:00:00'),
     author: "Ingwie Malmsten",
     hashTags:['#switzerland', '#Alps'],
-    photoLink: "switz.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It', 'they']
 },
     {depict:'1',
@@ -600,7 +603,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-15T12:00:00'),
     author: "Steve Jobs",
     hashTags:['#failed_dream', '#old_town','#silent_mood'],
-    photoLink: "america.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It', 'they']
 },
     {depict:'1',
@@ -611,7 +614,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-14T12:00:00'),
     author: "Ronnie James Dio",
     hashTags:['#beauty'],
-    photoLink: "Waterfall.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It']
 },
     {depict:'1',
@@ -622,7 +625,7 @@ var photoPosts = (function () {
     createdAt: new Date('2018-01-13T12:00:00'),
     author: "Klaus Meine",
     hashTags:['#Yosemit'],
-    photoLink: "yosemitt.jpg",
+    photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
     likes: ['He','She','It', 'they']
 },
     {depict:'1',
@@ -633,7 +636,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-12T12:00:00'),
         author: "Mark Twain",
         hashTags:['#Titanic'],
-        photoLink: "tit.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -644,7 +647,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-11T12:00:00'),
         author: "Joe Cocker",
         hashTags:['#Bulsara', '#Mercury'],
-        photoLink: "bulsara.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -655,7 +658,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-10T12:00:00'),
         author: "Oldschool Skater",
         hashTags:['#vert', '#skate_or_die'],
-        photoLink: "skate.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -666,7 +669,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-09T12:00:00'),
         author: "Jack Unknown",
         hashTags:['#film'],
-        photoLink: "future.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -677,7 +680,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-08T12:00:00'),
         author: "Les Paul",
         hashTags:['#my_guitar', '#lespaul','#gibson'],
-        photoLink: "lespaul.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -688,7 +691,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-07T12:00:00'),
         author: "Do Longboard!",
         hashTags:['#slides', '#are','#guides','#skate_or_die'],
-        photoLink: "slide.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -699,7 +702,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-06T12:00:00'),
         author: "Swedish King",
         hashTags:['#my_ship'],
-        photoLink: "vasa.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -710,7 +713,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-05T12:00:00'),
         author: "Rich Man",
         hashTags:['#yacht', '#mine'],
-        photoLink: "yacht.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -721,7 +724,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-04T12:00:00'),
         author: "Wolfgang Mozart",
         hashTags:['#nature', '#beauty'],
-        photoLink: "zalz.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -732,7 +735,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-03T12:00:00'),
         author: "African Hunter",
         hashTags:['#stone'],
-        photoLink: "zimb.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
     {depict:'1',
@@ -743,7 +746,7 @@ var photoPosts = (function () {
         createdAt: new Date('2018-01-01T12:00:00'),
         author: "Oldschool Skater",
         hashTags:['#skate_or_die'],
-        photoLink: "skaters.jpg",
+        photoLink: "http://www.thanemagazine.com/wp-content/uploads/2013/11/careca-y-max-copia.jpg",
         likes: ['He','She','It']
     },
 ];
@@ -833,11 +836,6 @@ localStorage.setItem("namesAndPasswords",usersString);
 
 localStorage.setItem("currentState",JSON.stringify("authorisedFeedback"));*/
 
-console.log(localStorage.getItem("namesAndPasswords"));
-console.log(localStorage.getItem("user"));
-console.log(localStorage.getItem("photoPosts"));
-console.log(localStorage.getItem("filter"));
-
 var users = JSON.parse(localStorage.getItem("namesAndPasswords"));
 
 var currentUser = JSON.parse(localStorage.getItem("user"));
@@ -889,6 +887,8 @@ function handleLoggingOut() {
     catch (err) {
     }
 
+    console.log();
+
     posts.currentUser = "";
     currentUser = "";
     localStorage.setItem("user", JSON.stringify(""));
@@ -908,8 +908,8 @@ try {
 catch(err){}
 
     try {
-        var applyFilterPageOne = document.getElementById('applyFilter');
-        applyFilterPageOne.addEventListener('click', handleFilterApply);
+        var applyFilterPage = document.getElementById('applyFilter');
+        applyFilterPage.addEventListener('click', handleFilterApply);
     }
 
     catch (err) {
@@ -943,7 +943,7 @@ function handleAddingNewPost() {
 
     document.getElementById('name').innerHTML = posts.currentUser;
 
-    document.getElementById('logOut').innerHTML = "<input type=\'image\' src=\"blue_arrow_right.png\" id='logging-out'>";
+    document.getElementById('logOut').innerHTML = "<input type=\'image\' src=\"images/blue_arrow_right.png\" id='logging-out'>";
     document.getElementById('logging-out').addEventListener('click', handleLoggingOut);
 
     document.getElementById('browse-button').innerHTML = "<button class=\"button\" type=\"button\" id=\"browse\">Загрузить ещё</button>";
@@ -969,11 +969,11 @@ function handleAddingPost() {
     document.getElementById('filter').innerHTML = "";
 
     document.getElementById('editingCreating').innerHTML = "<p>Ссылка на фото:"+
-        "</p><p><input type=\" file \" id=\"choosing\" accept=\".png,.jpg,.jpeg\"/></p>\n" +
+        "</p><input type=\" file \" id=\"choosing\" accept=\".png,.jpg,.jpeg\"/><br><br>\n" +
         "<p>Текст поста:</p>"+
-        "<p><textarea rows=\"4\" cols=\"100\" id=\"textOfPost\" ></textarea></p>\n" +
+        "<textarea rows=\"4\" cols=\"100\" id=\"textOfPost\" ></textarea><br><br>\n" +
         "<p></p>Хэштеги:</p>"+
-        "<p><input type=\"text\" id=\"tagOfPost\" />\n</p></div>\n";
+        "<input type=\"text\" id=\"tagOfPost\" />\n<br><br></div>\n";
     document.getElementById('buttonWrap').innerHTML = "<button class=\"button\" id=\"inputNewPost\">Загрузить пост</button>";
 
     document.getElementById('inputNewPost').addEventListener('click', handleAddingNewPost);
@@ -984,8 +984,8 @@ function handleLoggingIn() {
     document.getElementById('filter').innerHTML = "";
     document.getElementById('browse-button').innerHTML = "";
     stringInner = "<div class=\"logging-in\" id=\"logging-fields\">\n" +
-        "    <p>Введите  логин</p><p><input type = \"text\" id=\"loginName\">\n" +
-        "    <p>Введите пароль</p><input type=\"password\" id = \"password\"> <p></p>\n" +
+        "    Введите  логин<br><input type = \"text\" id=\"loginName\"> <br><br>\n" +
+        "    Введите пароль<br><input type=\"password\" id = \"password\"> <br><br>\n" +
         "    <button class=\"button-logging\" id=\"inputRegistration\">Войти</button>\n" +
         "    </div>";
     document.getElementById('feedback').innerHTML = stringInner;
@@ -1011,9 +1011,9 @@ function handleLoginPasswordInput() {
 
                 document.getElementById('filter').innerHTML = filterStringInsert();
 
-                document.getElementById('head').innerHTML = "<div class=\"header\"> <img src=\"cam.png\">YourLight</div>\n" +
+                document.getElementById('head').innerHTML = "<div class=\"header\"> <img src=\"images/cam.png\">YourLight</div>\n" +
                     "\n" +
-                    "    <div class=\"header\" id=\"userName\"> <img src=\"user_blue.png\"> <button class=\"button\" type=\"button\" id=\"logIn\">Войти</button></div>\n" +
+                    "    <div class=\"header\" id=\"userName\"> <img src=\"images/user_blue.png\"> <button class=\"button\" type=\"button\" id=\"logIn\">Войти</button></div>\n" +
                     "\n" +
                     "    <div class=\"header\"id=\"logOut\"></div>";
 
@@ -1054,7 +1054,6 @@ function handleLoginPasswordInput() {
 
 }
 
-
 function handleEditingPostApply() {
     var nameOfPicture = document.getElementById('choosing').value;
     if(nameOfPicture===""){
@@ -1079,7 +1078,7 @@ console.log(idOfPostToEdit);
 
     console.log(posts.photoPosts);
 
-    document.getElementById('logOut').innerHTML = "<input type=\'image\' src=\"blue_arrow_right.png\" id='logging-out'>";
+    document.getElementById('logOut').innerHTML = "<input type=\'image\' src=\"images/blue_arrow_right.png\" id='logging-out'>";
     document.getElementById('logging-out').addEventListener('click', handleLoggingOut);
 
     document.getElementById('browse-button').innerHTML = "<button class=\"button\" type=\"button\" id=\"browse\">Загрузить ещё</button>";
@@ -1135,11 +1134,11 @@ function handleDeletingEditingPost(event) {
         //console.log(document.getElementById('represent'));
 
         document.getElementById('editingCreating').innerHTML = "<div class=\"post\"> \n <img src=\"" + valueOfPicture + "\" class=\"photo-editing\" id=\"" + idOfEditedPost+
-            "\"><p></p> \n" +
-            "<p><input type=\" file \" id=\"choosing\" accept=\".png,.jpg,.jpeg\" value=\"" + valueOfPicture + "\"/></p>\n" +
-            "<p><textarea rows=\"4\" cols=\"100\" id=\"textOfPost\" >" + valueOfText +
-            "</textarea></p>\n" +
-            "<input type=\"text\" id=\"tagOfPost\" value=\"" + valueOfTags + "\" />\n</div>\n";
+            "\"><br><br> \n" +
+            "<input type=\" file \" id=\"choosing\" accept=\".png,.jpg,.jpeg\" value=\"" + valueOfPicture + "\"/><br><br>\n" +
+            "<textarea rows=\"4\" cols=\"100\" id=\"textOfPost\" >" + valueOfText +
+            "</textarea><br><br>\n" +
+            "<input type=\"text\" id=\"tagOfPost\" value=\"" + valueOfTags + "\" />\n<br><br></div>\n";
         document.getElementById('buttonWrap').innerHTML = "<button class=\"button\" id=\"inputNewPost\">Загрузить пост</button>";
 
         document.getElementById('inputNewPost').addEventListener('click', handleEditingPostApply);
