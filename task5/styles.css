@@ -49,10 +49,10 @@ body {
 }
 
 .footer{
-    position: page;
+    position: fixed;
     bottom: 0;
     width: 100%;
-    height: 18%;
+    height: 10%;
     background: lightgrey;
 }
 

@@ -200,8 +200,8 @@ var photoPosts = (function () {
             if (!author)
                 return newPosts;
 
-            for (var i = 0; i < newPosts.length; i++){
-                if (newPosts[i].author.toLowerCase() === author.toLowerCase()){
+            for (var i = 0; i < newPosts.length; i++) {
+                if (newPosts[i].author.toLowerCase() === author.toLowerCase()) {
                     findPosts.push(newPosts[i]);
                 }
             }
@@ -236,7 +236,7 @@ var photoPosts = (function () {
 
             var newPosts = this.photoPosts;
 
-            if (skip < 0 || skip >= photoPosts.length || !skip)
+            if (skip < 0 || !skip)
                 skip = 0;
 
             else if (skip !== 0) {
@@ -248,17 +248,22 @@ var photoPosts = (function () {
             else if (top !== 10) {
                 top++;
             }
-            if (filterConfig) {
-                if ("author" in filterConfig){
+
+            if (skip >= newPosts.length) {
+                newPosts = [];
+            }
+
+            if (filterConfig && newPosts.length>0) {
+                if ("author" in filterConfig) {
                     newPosts = filterByAuthor(filterConfig.author, newPosts, top);
                     document.getElementById('filter')[0].value = filterConfig.author;
-            }
-                if ("dateFrom" in filterConfig && "dateTo" in filterConfig){
+                }
+                if ("dateFrom" in filterConfig && "dateTo" in filterConfig && newPosts.length>0) {
                     newPosts = filterByDate(filterConfig.dateFrom, filterConfig.dateTo, newPosts, top);
                     document.getElementById('filter')[1].value = filterConfig.dateFrom;
                     document.getElementById('filter')[2].value = filterConfig.dateTo;
-            }
-                if (filterConfig.hashTags){
+                }
+                if (filterConfig.hashTags && newPosts.length>0) {
                     newPosts = filterByHashTags(filterConfig.hashTags, newPosts, top);
                     document.getElementById('filter')[3].value = filterConfig.hashTags;
                 }
@@ -271,16 +276,15 @@ var photoPosts = (function () {
 
             document.getElementById('feedback').innerHTML = "";
 
-            for(let i=0;i<newPosts.size;i++){
-                if(currentUser===newPosts[i].author){
+            for (let i = 0; i < newPosts.length; i++) {
+                if (currentUser === newPosts[i].author) {
                     document.getElementById("feedback").innerHTML += depictPhotoPostAuthorised(newPosts[i]);
                 }
-                else{
-                document.getElementById("feedback").innerHTML += depictPhotoPost(newPosts[i]);
+                else {
+                    document.getElementById("feedback").innerHTML += depictPhotoPost(newPosts[i]);
                 }
             }
 
-            return newPosts;
         }
 
         function sortF(a, b) {
@@ -361,11 +365,11 @@ var photoPosts = (function () {
                 oldPhotoPost.hashTags = photoPost.hashTags;
                 empty = true;
             }
-            
-            let i=0;
-            while(i<document.getElementById('feedback').getElementsByClassName('post').length){
-                if(document.getElementById('feedback').getElementsByClassName('post')[i].id.toString()=== oldPhotoPost.id){
-                   
+
+            let i = 0;
+            while (i < document.getElementById('feedback').getElementsByClassName('post').length) {
+                if (document.getElementById('feedback').getElementsByClassName('post')[i].id.toString() === oldPhotoPost.id) {
+
                     document.getElementById('feedback').getElementsByClassName('post')[i].innerHTML = depictPhotoPostWithoutWrap(oldPhotoPost);
                 }
                 i++;
