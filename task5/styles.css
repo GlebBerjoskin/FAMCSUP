@@ -15,6 +15,7 @@ body {
     flex-direction: column;
     margin-left: 0%;
     max-width: 80%;
+    margin-bottom:5%;
 }
 
 .top{
