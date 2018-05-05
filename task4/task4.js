@@ -432,7 +432,7 @@ var photoPosts = (function () {
             else if (skip !== 0) {
                 skip++;
             }
-            if (top === undefined || top <= 0)
+            if (!top || top < 0)
                 top = 10;
 
             else if (top !== 10) {
@@ -515,26 +515,22 @@ var photoPosts = (function () {
             if (!oldPhotoPost || !photoPost || !id)
                 return false;
 
-            if (photoPost.description !== undefined) {
-                if (photoPost.description !== null) {
+            if (photoPost.description) {
                     if (photoPost.description.length >= 200)
                         return false;
                     else {
                         oldPhotoPost.description = photoPost.description;
                         empty = true;
                     }
-                }
             }
 
-            if (photoPost.photoLink !== undefined) {
-                if (photoPost.photoLink !== null) {
+            if (photoPost.photoLink) {
                     if (photoPost.photoLink.length === 0)
                         return false;
                     else {
                         oldPhotoPost.photoLink = photoPost.photoLink;
                         empty = true;
                     }
-                }
             }
 
             return empty;
