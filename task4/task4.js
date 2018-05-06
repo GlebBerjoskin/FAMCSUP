@@ -377,9 +377,9 @@ var photoPosts = (function () {
 
         this.tooMuchWords = {
             description: 'Somebody has stolen our idea of fingerscanning!Somebody has stolen our idea of' +
-            ' fingerscanning!Somebody has stolen our idea of fingerscanning!Somebody has stolen our idea ' +
-            'of fingerscanning!Somebody has stolen our idea of fingerscanning! Somebody has stolen our idea of' +
-            ' fingerscanning!\'',
+                ' fingerscanning!Somebody has stolen our idea of fingerscanning!Somebody has stolen our idea ' +
+                'of fingerscanning!Somebody has stolen our idea of fingerscanning! Somebody has stolen our idea of' +
+                ' fingerscanning!\'',
             createdAt: new Date('2018-02-28T17:00:00'),
             author: 'Steve Jobs',
             photoLink: 'http://tourout.ru/file/opgq8cnfsulc/600x/i0yfcis2521m.jpg',
@@ -481,12 +481,12 @@ var photoPosts = (function () {
         }
 
         this.validatePhotoPost = function (photoPost) {
-            if ((typeof(photoPost.id) === "string") &&
-                (typeof(photoPost.description) === "string") &&
-                (typeof(photoPost.author) === "string") &&
-                (typeof(photoPost.photoLink) === "string") &&
+            if ((typeof (photoPost.id) === "string") &&
+                (typeof (photoPost.description) === "string") &&
+                (typeof (photoPost.author) === "string") &&
+                (typeof (photoPost.photoLink) === "string") &&
                 (photoPost.createdAt instanceof Date)) {
-                if (photoPost.photoLink.length !== 0 && photoPost.description.length <= 200 && photoPost.author !== 0) {
+                if (photoPost.photoLink.length !== 0 && photoPost.description.length <= 200 && photoPost.author.length !== 0) {
                     if (!photoPost.hashTags) {
                         photoPost.hashTags = [];
                     }
@@ -516,21 +516,21 @@ var photoPosts = (function () {
                 return false;
 
             if (photoPost.description) {
-                    if (photoPost.description.length >= 200)
-                        return false;
-                    else {
-                        oldPhotoPost.description = photoPost.description;
-                        empty = true;
-                    }
+                if (photoPost.description.length >= 200)
+                    return false;
+                else {
+                    oldPhotoPost.description = photoPost.description;
+                    empty = true;
+                }
             }
 
             if (photoPost.photoLink) {
-                    if (photoPost.photoLink.length === 0)
-                        return false;
-                    else {
-                        oldPhotoPost.photoLink = photoPost.photoLink;
-                        empty = true;
-                    }
+                if (photoPost.photoLink.length === 0)
+                    return false;
+                else {
+                    oldPhotoPost.photoLink = photoPost.photoLink;
+                    empty = true;
+                }
             }
 
             return empty;
@@ -566,14 +566,14 @@ console.log(Posts.getPhotoPosts(5, 20));
 console.log("\nSkip = 5 :  10 posts sorted by dateFrom starting from the 6th: ")
 console.log(Posts.getPhotoPosts(5));
 console.log("\nfilterConfig = {author : 'Carcassonne Maid'} : 10 posts by Carcassonne Maid(3 of them are the result) sorted by dateFrom: ");
-console.log(Posts.getPhotoPosts(0, 10, {author: 'Carcassonne Maid'}));
+console.log(Posts.getPhotoPosts(0, 10, { author: 'Carcassonne Maid' }));
 console.log("\nfilterConfig = {dateTo : '19.02.2018', dateFrom : '01.01.2001'} : posts sorted by dateFrom published between these dates");
 console.log(Posts.getPhotoPosts(0, 10, {
     dateFrom: new Date('2001-02-19T00:00:00'),
     dateTo: new Date('2018-02-19T00:00:00')
 }));
 console.log("\nfilterConfig = {hashTag : '#Catars'} : 3 posts sorted by dateFrom with this hashTag");
-console.log(Posts.getPhotoPosts(0, 10, {hashTags: ['#Catars']}));
+console.log(Posts.getPhotoPosts(0, 10, { hashTags: ['#Catars'] }));
 console.log("\nfilterConfig = {author : 'Carcassonne Maid', dateFrom:01.01.2001, dateTo : '19.05.2018', hashTags :'#Catars','#Carcassonne'} : 3 posts");
 console.log(Posts.getPhotoPosts(0, 10, {
     author: 'Carcassonne Maid',
@@ -617,24 +617,24 @@ console.log(Posts.addPhotoPost({
 console.log('\n\nReturn false because of existing post with the same ID : ');
 console.log(Posts.addPhotoPost(Posts.getPhotoPost('5')));
 console.log('Return false for the lack of arguments : ');
-console.log(Posts.addPhotoPost({id: '25', description: 'lorem ipsum'}));
+console.log(Posts.addPhotoPost({ id: '25', description: 'lorem ipsum' }));
 console.groupEnd();
 
 console.group("\n\n\n editPhotoPost");
 console.log('Post with id=5 is edited : ');
-console.log(Posts.editPhotoPost('5', {description: 'First iPhone ever'}));
+console.log(Posts.editPhotoPost('5', { description: 'First iPhone ever' }));
 console.log("\nPhotoPost with id \'5\' after editing : ");
 console.log(Posts.photoPosts[4]);
 console.log('\nReturn false because such id doesn\'t exist: ');
-console.log(Posts.editPhotoPost('200', {description: 'I was in Mexico last night...'}));
+console.log(Posts.editPhotoPost('200', { description: 'I was in Mexico last night...' }));
 console.log('\nReturn false because you can\'t change id : ');
-console.log(Posts.editPhotoPost('5', {id: '1'}));
+console.log(Posts.editPhotoPost('5', { id: '1' }));
 console.log('\nReturn false because of too long description) : ');
 console.log(Posts.editPhotoPost('26', {
     description: '0000000000000000000000000000000000000000000000000' +
-    '000000000000000000000000000000000000000000000000000000000000000' +
-    '0000000000000000000000000000000000000000000000000000' +
-    '0000000000000000000000000000000000000000000000000000'
+        '000000000000000000000000000000000000000000000000000000000000000' +
+        '0000000000000000000000000000000000000000000000000000' +
+        '0000000000000000000000000000000000000000000000000000'
 }));
 console.groupEnd();
 
