@@ -14,6 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     margin-left: 0%;
+    margin-bottom: 15%;
     max-width: 80%;
 }
 
@@ -85,12 +86,14 @@ body {
     bottom: 0;
     width: 100%;
     height: 10%;
-    background: cornflowerblue;
+    background: lightgrey;
 }
 
 .button{
     background: cornflowerblue;
-    margin-left:40%;
+    margin-left:27%;
+    margin-right:40%;
+    margin-bottom:5%;
 }
 
 .button-browser{
@@ -107,14 +110,10 @@ body {
 margin-left:48%;
 }
 
-.place-eater{
-    width: 100%;
-    height: 10%;
-    background: white;
-}
 
 .filter{
     position: fixed;
-    right: 8%;
+    margin-left: 70%;
+    margin-right:60%;
     top: 10%;
 }
