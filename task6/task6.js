@@ -13,7 +13,7 @@ function handleBrowseMore() {
 
 }
 
-function filterStringInsert(){
+function filterStringInsert() {
     return " <p> Фильтровать по:</p>\n" +
         "                   <p>Имя автора: </p>\n" +
         "                    <input id=\"nameAuthor\"type=\"text\" placeholder=\"Введите имя автора\">\n" +
@@ -28,6 +28,9 @@ function filterStringInsert(){
 }
 
 var depictPhotoPost = function (photoPost) {
+    if(!photoPost){
+        return ;
+    }
     let buffer = "";
     if (photoPost.hashTags) {
         for (let i = 0; i < photoPost.hashTags.length; i++) {
@@ -63,6 +66,9 @@ var depictPhotoPost = function (photoPost) {
 }
 
 var depictPhotoPostWithoutWrap = function (photoPost) {
+    if(!photoPost){
+        return ;
+    }
     let buffer = "";
     if (photoPost.hashTags) {
         for (let i = 0; i < photoPost.hashTags.length; i++) {
@@ -96,6 +102,9 @@ var depictPhotoPostWithoutWrap = function (photoPost) {
 }
 
 var depictPhotoPostAuthorised = function (photoPost) {
+    if(!photoPost){
+        return ;
+    }
     let buffer = "";
     if (photoPost.hashTags) {
         for (let i = 0; i < photoPost.hashTags.length; i++) {
@@ -135,6 +144,9 @@ var depictPhotoPostAuthorised = function (photoPost) {
 }
 
 var depictPhotoPostAuthorisedWithoutWrap = function (photoPost) {
+    if(!photoPost){
+        return ;
+    }
     let buffer = "";
     if (photoPost.hashTags) {
         for (let i = 0; i < photoPost.hashTags.length; i++) {
@@ -208,7 +220,6 @@ var photoPosts = (function () {
                 return newPosts;
             }
 
-            console.log(author.toLowerCase());
             for (var i = 0; i < newPosts.length; i++) {
                 if (newPosts[i].author.toLowerCase() === author.toLowerCase() && newPosts[i].depict === '1') {
                     findPosts.push(newPosts[i]);
@@ -249,34 +260,15 @@ var photoPosts = (function () {
         }
 
         filterByHashTags = function (hashTag, newPosts, top) {
-            var findPosts = [];
-
-            if (!hashTag || hashTag.length === 0) {
+            if (hashTag == []) {
                 return newPosts;
             }
 
-            for (var j = 0; j < newPosts.length; j++) {
-                if (newPosts[j] && newPosts[j].depict === '1') {
-                    var keeper = 0;
-
-                    if (hashTag.length === 1) {
-                        if (hashTag[0] === '') {
-                            findPosts.push(newPosts[j]);
-                        }
-                    }
-
-                    for (var i = 0; i < hashTag.length; i++) {
-                        if (hashTag[i]) {
-                            if (newPosts[j].hashTags.indexOf(hashTag[i]) !== -1)
-                                keeper++;
-                        }
-                    }
-                    if (keeper === hashTag.length) {
-                        findPosts.push(newPosts[j]);
-                    }
-                }
-            }
-            return findPosts;
+            return newPosts.filter(function (post) {
+                return hashTag.every(function (hashTagIndex) {
+                    return post.hashTags.includes(hashTagIndex);
+                });
+            });
         }
 
         this.getPhotoPosts = function (topPosition, filterConfig) {
@@ -285,14 +277,14 @@ var photoPosts = (function () {
 
             document.getElementById('feedback').innerHTML = "";
 
-            if (topPosition === undefined || topPosition <= 0)
+            if (!topPosition || topPosition < 0)
                 topPosition = 0;
-
 
             if (filterConfig) {
                 if (filterConfig.author) {
                     newPosts = filterByAuthor(filterConfig.author, newPosts, top);
                 }
+
 
                 if (filterConfig.dateFrom || filterConfig.dateTo) {
                     newPosts = filterByDate(filterConfig.dateFrom, filterConfig.dateTo, newPosts, top);
@@ -302,11 +294,23 @@ var photoPosts = (function () {
                     newPosts = filterByHashTags(filterConfig.hashTags, newPosts, top);
                 }
 
+                for(let i=0;i<newPosts.length;i++){
+                    if(newPosts[i].depict === "0"){
+                        newPosts.splice(i,1);
+                    }
+                }
+
                 newPosts = this.sortByDate(newPosts);
 
             }
             else {
                 newPosts = this.sortByDate(this.photoPosts);
+                for(let i=0;i<newPosts.length;i++){
+                    if(newPosts[i].depict === "0"){
+                        newPosts.splice(i,1);
+                        i--;
+                    }
+                }
             }
 
             document.getElementById('filter').children[2].value = filterConfig.author;
@@ -314,10 +318,10 @@ var photoPosts = (function () {
             document.getElementById('filter').children[7].value = filterConfig.dateTo;
             document.getElementById('filter').children[9].value = filterConfig.hashTags;
 
-            var length = 0;
+            let length = 0;
 
             if (newPosts.length > 10) {
-                var i = 0;
+                let i = 0;
 
                 while (i < topPosition / 10) {
                     i++;
@@ -326,16 +330,16 @@ var photoPosts = (function () {
                     }
                     else break;
                 }
-
                 if (newPosts.length - i * 10 === 0) {
                     length += 10;
                     document.getElementById('browse-button').innerHTML = "";
                 }
-                else if (newPosts.length - (i - 1) * 10 < 10) {
+                if (newPosts.length - (i - 1) * 10 < 10) {
                     length += newPosts.length - (i - 1) * 10;
                     document.getElementById('browse-button').innerHTML = "";
                 }
             }
+
             else {
                 document.getElementById('browse-button').innerHTML = "";
                 length = newPosts.length;
@@ -412,12 +416,15 @@ var photoPosts = (function () {
         }
 
         this.validatePhotoPost = function (photoPost) {
-            if ((typeof(photoPost.id) === "string") &&
-                (typeof(photoPost.description) === "string") &&
-                (typeof(photoPost.author) === "string") &&
-                (typeof(photoPost.photoLink) === "string") &&
+            if ((typeof (photoPost.id) === "string") &&
+                (typeof (photoPost.description) === "string") &&
+                (typeof (photoPost.author) === "string") &&
+                (typeof (photoPost.photoLink) === "string") &&
                 (photoPost.createdAt instanceof Date)) {
                 if (photoPost.photoLink.length !== 0 && photoPost.description.length <= 200 && photoPost.author !== 0) {
+                    if (!photoPost.hashTags) {
+                        photoPost.hashTags = [];
+                    }
                     return true;
                 }
             }
@@ -435,7 +442,7 @@ var photoPosts = (function () {
                 return true;
             }
 
-            alert("измените параметры поста!");
+            alert("change post parameters!");
 
             return false;
         }
@@ -446,36 +453,39 @@ var photoPosts = (function () {
             if (!oldPhotoPost || !photoPost || !id)
                 return false;
 
-            if (photoPost.description !== undefined) {
-                if (photoPost.description !== null) {
-                    if (photoPost.description.length >= 200)
-                        return false;
-                    else {
-                        oldPhotoPost.description = photoPost.description;
-                        empty = true;
-                    }
-                }
-            }
-
-            if (photoPost.photoLink !== undefined) {
-                if (photoPost.photoLink !== null) {
-                    if (photoPost.photoLink.length === 0)
-                        return false;
-                    else {
-                        oldPhotoPost.photoLink = photoPost.photoLink;
-                        empty = true;
-                    }
-                }
-            }
-
-            if (photoPost.hashTags !== undefined) {
-                if (photoPost.hashTags !== null) {
-                    oldPhotoPost.hashTags = photoPost.hashTags;
+            if (photoPost.description) {
+                if (photoPost.description.length >= 200)
+                    return false;
+                else {
+                    oldPhotoPost.description = photoPost.description;
                     empty = true;
                 }
             }
-            console.log(document.getElementById('feedback').getElementsByClassName('post'));
-            document.getElementById('feedback').getElementsByClassName('post')[id - 1].innerHTML = depictPhotoPostWW(oldPhotoPost);
+
+            if (photoPost.photoLink) {
+                if (photoPost.photoLink.length === 0)
+                    return false;
+                else {
+                    oldPhotoPost.photoLink = photoPost.photoLink;
+                    empty = true;
+
+                }
+            }
+
+            if (photoPost.hashTags) {
+                oldPhotoPost.hashTags = photoPost.hashTags;
+                empty = true;
+
+            }
+
+            let i = 0;
+            while (i < document.getElementById('feedback').getElementsByClassName('post').length) {
+                if (document.getElementById('feedback').getElementsByClassName('post')[i].id.toString() === oldPhotoPost.id) {
+
+                    document.getElementById('feedback').getElementsByClassName('post')[i].innerHTML = depictPhotoPostWithoutWrap(oldPhotoPost);
+                }
+                i++;
+            }
 
             return empty;
         }
@@ -494,22 +504,7 @@ var photoPosts = (function () {
         }
 
         this.removeAllPosts = function (id, array) {
-            if (!id)
-                return false;
-
-            for (var i = 0; i < array.length; i++) {
-                if (array[i].id === id) {
-                    array[i].depict = '0';
-                }
-            }
-
-            elementsArray = document.getElementById('feedback').getElementsByClassName('post');
-
-            for (var i = 0; i < elementsArray.length; i++) {
-                elementsArray[0].remove();
-                return true;
-            }
-            elementsArray = document.getElementById('feedback').innerHTML = "";
+            document.getElementById('feedback').innerHTML = "";
         }
     }
 
@@ -833,11 +828,6 @@ localStorage.setItem("namesAndPasswords",usersString);
 
 localStorage.setItem("currentState",JSON.stringify("authorisedFeedback"));*/
 
-console.log(localStorage.getItem("namesAndPasswords"));
-console.log(localStorage.getItem("user"));
-console.log(localStorage.getItem("photoPosts"));
-console.log(localStorage.getItem("filter"));
-
 var users = JSON.parse(localStorage.getItem("namesAndPasswords"));
 
 var currentUser = JSON.parse(localStorage.getItem("user"));
@@ -873,7 +863,12 @@ function handleFilterApply() {
     filterConfig.author = document.getElementById('nameAuthor').value;
     filterConfig.dateFrom = document.getElementById('dateFrom').value;
     filterConfig.dateTo = document.getElementById('dateTo').value;
-    filterConfig.hashTags = document.getElementById('hashtags').value.split(",");
+    if (document.getElementById('hashtags').value.trim() === "") {
+        filterConfig.hashTags = [];
+    }
+    else {
+        filterConfig.hashTags = document.getElementById('hashtags').value.split(",");
+    }
     localStorage.setItem("filter", JSON.stringify(filterConfig));
 
     if (posts.getPhotoPosts(10, filterConfig) > 10) {
@@ -901,11 +896,11 @@ function handleLoggingOut() {
 
     var logInPage = document.getElementById('loggingIn');
     logInPage.addEventListener('click', handleLoggingIn);
-try {
-    var browseMorePage = document.getElementById('browse');
-    browseMorePage.addEventListener('click', handleBrowseMore);
-}
-catch(err){}
+    try {
+        var browseMorePage = document.getElementById('browse');
+        browseMorePage.addEventListener('click', handleBrowseMore);
+    }
+    catch (err) { }
 
     try {
         var applyFilterPageOne = document.getElementById('applyFilter');
@@ -922,11 +917,11 @@ function handleAddingNewPost() {
     var tags = document.getElementById('tagOfPost').value;
 
     if (text.length > 200 || text.length === 0) {
-        alert('Слишком короткое или слишком длинное описание!');
+        alert('Too short or too long description!');
         return 0;
     }
 
-    if(!posts.addPhotoPost({
+    if (!posts.addPhotoPost({
         depict: '1',
         id: (Number(posts.photoPosts[posts.photoPosts.length - 1].id) + 1).toString(),
         description: text,
@@ -935,7 +930,7 @@ function handleAddingNewPost() {
         hashTags: tags.split(","),
         photoLink: nameOfPicture.split("\\")[nameOfPicture.split("\\").length - 1],
         likes: []
-    })){
+    })) {
         return 0;
     }
 
@@ -968,11 +963,11 @@ function handleAddingPost() {
     document.getElementById('browse-button').innerHTML = "";
     document.getElementById('filter').innerHTML = "";
 
-    document.getElementById('editingCreating').innerHTML = "<p>Ссылка на фото:"+
+    document.getElementById('editingCreating').innerHTML = "<p>Ссылка на фото:" +
         "</p><p><input type=\" file \" id=\"choosing\" accept=\".png,.jpg,.jpeg\"/></p>\n" +
-        "<p>Текст поста:</p>"+
+        "<p>Текст поста:</p>" +
         "<p><textarea rows=\"4\" cols=\"100\" id=\"textOfPost\" ></textarea></p>\n" +
-        "<p></p>Хэштеги:</p>"+
+        "<p></p>Хэштеги:</p>" +
         "<p><input type=\"text\" id=\"tagOfPost\" />\n</p></div>\n";
     document.getElementById('buttonWrap').innerHTML = "<button class=\"button\" id=\"inputNewPost\">Загрузить пост</button>";
 
@@ -1019,15 +1014,15 @@ function handleLoginPasswordInput() {
 
                 posts.changeCurrentUser(posts.currentUser);
 
-                document.getElementById('browse-button').innerHTML = "<button class=\"button\" type=\"button\" id=\"browse\">Загрузить ещё</button>";
-
-                posts.getPhotoPosts(10, filterConfig);
+                if(posts.getPhotoPosts(10, filterConfig)>10){
+                    document.getElementById('browse-button').innerHTML = "<button class=\"button\" type=\"button\" id=\"browse\">Загрузить ещё</button>";
+                    var browseMoreBrowsedPage = document.getElementById('browse');
+                    browseMoreBrowsedPage.addEventListener('click', handleBrowseMore);
+    
+                }
 
                 var logOutBrowsedPage = document.getElementById('logging-out');
                 logOutBrowsedPage.addEventListener('click', handleLoggingOut);
-
-                var browseMoreBrowsedPage = document.getElementById('browse');
-                browseMoreBrowsedPage.addEventListener('click', handleBrowseMore);
 
                 var applyFilterBrowsedPage = document.getElementById('applyFilter');
                 applyFilterBrowsedPage.addEventListener('click', handleFilterApply);
@@ -1049,35 +1044,34 @@ function handleLoginPasswordInput() {
     }
 
     if (count === 0) {
-        alert("Неправильный логин или пароль");
+        alert("Wrong login or password!");
     }
 
 }
 
-
 function handleEditingPostApply() {
     var nameOfPicture = document.getElementById('choosing').value;
-    if(nameOfPicture===""){
-        nameOfPicture=document.getElementById('editingCreating').children[0].children[0].src;
+    if (nameOfPicture === "") {
+        nameOfPicture = document.getElementById('editingCreating').children[0].children[0].src;
     }
 
     var text = document.getElementById('textOfPost').value;
     var tags = document.getElementById('tagOfPost').value;
 
     var idOfPostToEdit = document.getElementById('editingCreating').children[0].children[0].id;
-console.log(idOfPostToEdit);
+    
     if (text.length > 200 || text.length === 0) {
-        alert('Слишком короткое или слишком длинное описание!');
+        alert('Too short or too long description!');
         return 0;
     }
 
-    posts.getPhotoPost(idOfPostToEdit.toString()).photoLink=nameOfPicture;
-    posts.getPhotoPost(idOfPostToEdit.toString()).hashTags=tags.split(",");
-    posts.getPhotoPost(idOfPostToEdit.toString()).description=text;
+    posts.getPhotoPost(idOfPostToEdit.toString()).photoLink = nameOfPicture;
+    posts.getPhotoPost(idOfPostToEdit.toString()).hashTags = tags.split(",");
+    posts.getPhotoPost(idOfPostToEdit.toString()).description = text;
 
     localStorage.setItem("photoPosts", JSON.stringify(posts.photoPosts));
 
-    console.log(posts.photoPosts);
+  
 
     document.getElementById('logOut').innerHTML = "<input type=\'image\' src=\"blue_arrow_right.png\" id='logging-out'>";
     document.getElementById('logging-out').addEventListener('click', handleLoggingOut);
@@ -1105,10 +1099,8 @@ function handleDeletingEditingPost(event) {
         var postToDelete = event.target.parentElement.parentElement.parentElement;
 
         var idOfDeletedPost = postToDelete.children[1].id.toString();
-
+        
         posts.removePhotoPost(idOfDeletedPost, posts.photoPosts);
-
-        //deletePost.removeChild(postToDelete);
 
         posts.getPhotoPosts(10, filterConfig);
 
@@ -1120,7 +1112,6 @@ function handleDeletingEditingPost(event) {
         var textToEdit = event.target.parentElement.parentElement.parentElement.children[2].innerHTML;
         var tagsToEdit = event.target.parentElement.parentElement.children[0].children[0].innerHTML;
         var idOfEditedPost = event.target.parentElement.parentElement.parentElement.children[1].id;
-        //console.log(event.target.parentElement.parentElement.children[0].children[0].innerHTML);
 
         document.getElementById('feedback').innerHTML = "";
         document.getElementById('browse-button').innerHTML = "";
@@ -1132,9 +1123,7 @@ function handleDeletingEditingPost(event) {
 
         var valueOfText = textToEdit;
 
-        //console.log(document.getElementById('represent'));
-
-        document.getElementById('editingCreating').innerHTML = "<div class=\"post\"> \n <img src=\"" + valueOfPicture + "\" class=\"photo-editing\" id=\"" + idOfEditedPost+
+        document.getElementById('editingCreating').innerHTML = "<div class=\"post\"> \n <img src=\"" + valueOfPicture + "\" class=\"photo-editing\" id=\"" + idOfEditedPost +
             "\"><p></p> \n" +
             "<p><input type=\" file \" id=\"choosing\" accept=\".png,.jpg,.jpeg\" value=\"" + valueOfPicture + "\"/></p>\n" +
             "<p><textarea rows=\"4\" cols=\"100\" id=\"textOfPost\" >" + valueOfText +
