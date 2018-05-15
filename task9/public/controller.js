@@ -416,12 +416,14 @@ var handleAddingNewPost = function () {
     if (text.length > 200 || text.length === 0) {
         alert('Too short or too long description!');
         handleAddingPost();
+        return 0;
     }
 
     var image = view.getPostFile();
     if (image.length === 0) {
         alert('Choose photo please!');
         handleAddingPost();
+        return 0;
     }
 
     formData.append('tagOfPost', view.getPostTags());
@@ -476,30 +478,29 @@ var handleEditingPostApply = function () {
     var image = view.getImageEdited();
 
     if (text.length > 200 || text.length === 0) {
-        alert('Too short or too long description!');
+        alert('Too short or too long description!The text will not be changed!');
 
         var post = model.getEditedPost();
-        handleBadRequest(post);
+        text = post.textToEdit;
     }
 
     if (image.length === 0) {
-        alert('Choose any picture!');
+        alert('Invalid picture! It will not be chosen');
 
         var post = model.getEditedPost();
-        handleBadRequest(post);
+        image = post.imageToEdit;
+        //console.log(image);
     }
 
     var tags = view.getPostTags();
-    var textOne = view.getPostText();
 
     if (image.split("/images/")[0] === "") {
-        console.log("gh");
-        model.editPhotoPost(model.getEditedPost().idOfEditedPost, image, tags, textOne);
+        model.editPhotoPost(model.getEditedPost().idOfEditedPost, image, tags, text);
     }
 
     else {
         let formData = new FormData(document.forms.editingCreating);
-        model.editPhotoPostMulter(model.getEditedPost().idOfEditedPost, formData, textOne, tags);
+        model.editPhotoPostMulter(model.getEditedPost().idOfEditedPost, formData, text, tags);
     }
 
 

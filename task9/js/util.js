@@ -219,6 +219,13 @@ var postsEditor = (function () {
             if (image) {
                 photoObject.photoPosts[i].photoLink = image;
             }
+            if(tags){
+                photoObject.photoPosts[i].hashTags = [];
+                photoObject.photoPosts[i].hashTags = tags;
+            }
+            if(!tags){
+                photoObject.photoPosts[i].hashTags = [];
+            }
 
             let writer = fs.createWriteStream('server/data/posts.json');
             writer.write(JSON.stringify(photoObject));
