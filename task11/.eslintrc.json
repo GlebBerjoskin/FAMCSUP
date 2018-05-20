@@ -1,0 +1,25 @@
+{
+    "extends": "airbnb-base",
+    "env": {
+        "browser": true
+    },
+    "rules": {
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "prefer-destructuring":"off",
+        "prefer-template":"off",
+        "no-param-reassign":"off",
+        "arrow-body-style": ["error", "always"],
+        "func-names":"off",
+        "prefer-const":"off",
+        "no-undef":"off",
+        "no-else-return":"off",
+        "no-use-before-define":"off",
+        "no-empty":"off",
+        "no-alert":"off",
+        "consistent-return":"off",
+        "no-restricted-globals":"off"
+    }
+}
